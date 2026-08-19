@@ -4,14 +4,21 @@ import 'package:go_router/go_router.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../features/auth/presentation/viewmodel/auth_viewmodel.dart';
 import '../../features/auth/presentation/views/login_screen.dart';
+import '../../features/quiz/presentation/views/quiz_screen.dart';
+import '../../features/splash/presentation/views/splash_screen.dart';
+import '../../features/onboarding/presentation/views/onboarding_screen.dart';
 
 final routerProvider = Provider<GoRouter>((ref) {
   final authState = ref.watch(authStateStreamProvider);
 
   return GoRouter(
-    initialLocation: '/login',
+    initialLocation: '/splash',
     redirect: (BuildContext context, GoRouterState state) {
       final session = authState.asData?.value.session;
+
+      final publicRoutes = ['/splash', '/onboarding', '/login', '/quiz', '/register'];
+      final isPublicRoute = publicRoutes.contains(state.matchedLocation);
+
       final isLoggingIn = state.matchedLocation == '/login';
 
       if (session == null && !isLoggingIn) return '/login';
@@ -21,8 +28,20 @@ final routerProvider = Provider<GoRouter>((ref) {
     },
     routes: [
       GoRoute(
+        path: '/splash',
+        builder: (context, state) => const SplashScreen(),
+      ),
+      GoRoute(
+        path: '/onboarding',
+        builder: (context, state) => const OnboardingScreen(),
+      ),
+      GoRoute(
         path: '/login',
         builder: (context, state) => const LoginScreen(),
+      ),
+      GoRoute(
+        path: '/quiz',
+        builder: (context, state) => const QuizScreen(),
       ),
       GoRoute(
         path: '/home',
