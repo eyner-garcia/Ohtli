@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import '../../features/auth/presentation/viewmodel/auth_viewmodel.dart';
-import '../../features/auth/presentation/views/login_screen.dart';
-import '../../features/quiz/presentation/views/quiz_screen.dart';
-import '../../features/splash/presentation/views/splash_screen.dart';
-import '../../features/onboarding/presentation/views/onboarding_screen.dart';
+import '../../features/auth/presentation/viewmodels/auth_viewmodel.dart';
+import '../../features/auth/presentation/views/login_view.dart';
+import '../../features/home/presentation/views/swipe_screen.dart';
+import '../../features/utils/presentation/views/splash_view.dart';
+import '../../features/utils/presentation/views/onboarding_view.dart';
 
 final routerProvider = Provider<GoRouter>((ref) {
   final authState = ref.watch(authStateStreamProvider);

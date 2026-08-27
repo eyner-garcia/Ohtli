@@ -131,7 +131,7 @@ class HomeScreen extends StatelessWidget {
       ),
 
       // 7. Barra de Navegación Inferior (BottomNavigationBar)
-      BottomNavigationBar(
+      /* BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         backgroundColor: Colors.white,
         selectedItemColor: primaryColor,
@@ -155,7 +155,7 @@ class HomeScreen extends StatelessWidget {
             label: 'Más',
           ),
         ],
-      ),
+      ),*/
     );
   }
 }
