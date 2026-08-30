@@ -19,7 +19,6 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void _startAnimation() {
-    // 1. Inicia la animación de entrada (Fade in + Zoom) 100ms después de abrir la app
     Future.delayed(const Duration(milliseconds: 100), () {
       if (mounted) {
         setState(() {
@@ -29,10 +28,9 @@ class _SplashScreenState extends State<SplashScreen> {
       }
     });
 
-    // 2. Espera 3 segundos y navega automáticamente a la siguiente pantalla
     Future.delayed(const Duration(seconds: 3), () {
       if (mounted) {
-        context.go('/onboarding'); // Redirige al Onboarding
+        context.go('/onboarding');
       }
     });
   }
@@ -40,15 +38,14 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // Fondo verde oscuro elegante basado en tu diseño
       backgroundColor: const Color(0xFF163323),
       body: Center(
         child: AnimatedOpacity(
-          duration: const Duration(seconds: 2), // Duración del fundido
+          duration: const Duration(seconds: 2),
           curve: Curves.easeInOut,
           opacity: _opacity,
           child: AnimatedScale(
-            duration: const Duration(seconds: 2), // Duración del zoom
+            duration: const Duration(seconds: 2),
             curve: Curves.easeOutCubic,
             scale: _scale,
             child: Column(
@@ -62,14 +59,13 @@ class _SplashScreenState extends State<SplashScreen> {
                     shape: BoxShape.circle,
                   ),
                   child: const Icon(
-                    Icons.travel_explore_rounded, // Ícono de viaje/mapa
+                    Icons.travel_explore_rounded,
                     size: 80,
                     color: Colors.lightGreenAccent,
                   ),
                 ),
                 const SizedBox(height: 24),
 
-                // Título principal
                 const Text(
                   'Ohtli',
                   style: TextStyle(
@@ -81,7 +77,6 @@ class _SplashScreenState extends State<SplashScreen> {
                 ),
                 const SizedBox(height: 12),
 
-                // Subtítulo
                 const Text(
                   'Vive experiencias reales.',
                   style: TextStyle(

@@ -12,7 +12,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   final PageController _pageController = PageController();
   int _currentPage = 0;
 
-  // Las 3 láminas basadas en tu diseño
   final List<Map<String, String>> _slides = [
     {
       'title': '¿Qué es Ohtli?',
@@ -45,7 +44,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         backgroundColor: Colors.white,
         elevation: 0,
         actions: [
-          // Botón Omitir para ir directo al Login
           if (_currentPage < _slides.length - 1)
             TextButton(
               onPressed: () => context.go('/login'),
@@ -59,7 +57,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            // 1. Contenido deslizable (PageView)
             Expanded(
               child: PageView.builder(
                 controller: _pageController,
@@ -76,7 +73,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        // Círculo con Ícono / Ilustración
                         Container(
                           width: 130,
                           height: 130,
@@ -104,7 +100,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         ),
                         const SizedBox(height: 16),
 
-                        // Descripción
                         Text(
                           slide['description']!,
                           textAlign: TextAlign.center,
@@ -121,12 +116,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               ),
             ),
 
-            // 2. Indicadores de puntos (Dots) y Botón Principal
             Padding(
               padding: const EdgeInsets.all(24.0),
               child: Column(
                 children: [
-                  // Puntos de navegación
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: List.generate(
@@ -147,7 +140,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   ),
                   const SizedBox(height: 32),
 
-                  // Botón Dinámico (Siguiente / Empezar)
                   SizedBox(
                     width: double.infinity,
                     height: 54,
@@ -159,7 +151,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             curve: Curves.easeInOut,
                           );
                         } else {
-                          // Al finalizar las láminas navega a Login
                           context.go('/login');
                         }
                       },
