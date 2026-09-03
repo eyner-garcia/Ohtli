@@ -71,10 +71,16 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
     final fileExt = imageFile.path.split('.').last;
     final filePath = '$userId/avatar_${DateTime.now().millisecondsSinceEpoch}.$fileExt';
 
-    await supabaseClient.storage.from('avatars').upload(
+    final bytes = await imageFile.readAsBytes();
+
+    await supabaseClient.storage.from('avatars').uploadBinary(
       filePath,
-      imageFile,
-      fileOptions: const FileOptions(cacheControl: '3600', upsert: true),
+      bytes,
+      fileOptions: FileOptions(
+        cacheControl: '3600',
+        upsert: true,
+        contentType: 'image/$fileExt', // Opcional pero recomendado para el tipo MIME
+      ),
     );
 
     return supabaseClient.storage.from('avatars').getPublicUrl(filePath);

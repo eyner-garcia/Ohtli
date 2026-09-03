@@ -27,6 +27,7 @@ class ProfileView extends ConsumerWidget {
       body: profileAsync.when(
         data: (profile) {
           final user = profile.user;
+          final fotoUrl = user.fotoPerfilUrl;
           final initials = user.nombreCompleto.isNotEmpty
               ? user.nombreCompleto[0].toUpperCase()
               : 'U';
@@ -43,13 +44,18 @@ class ProfileView extends ConsumerWidget {
                       backgroundColor: Theme.of(context)
                           .colorScheme
                           .surfaceContainerHighest,
-                      child: Text(
+                      backgroundImage: (fotoUrl != null && fotoUrl.isNotEmpty)
+                          ? NetworkImage(fotoUrl)
+                          : null,
+                      child: (fotoUrl == null || fotoUrl.isEmpty)
+                          ? Text(
                         initials,
                         style: const TextStyle(
                           fontSize: 40,
                           fontWeight: FontWeight.bold,
                         ),
-                      ),
+                      )
+                          : null,
                     ),
                     const SizedBox(height: 16),
                     Text(
@@ -69,13 +75,14 @@ class ProfileView extends ConsumerWidget {
                     ),
                     const SizedBox(height: 16),
                     OutlinedButton.icon(
-                      onPressed: () {
-                        Navigator.push(
+                      onPressed: () async {
+                        await Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder: (_) => EditProfileView(profile: profile),
                           ),
                         );
+                        ref.read(profileViewModelProvider.notifier).refreshProfile();
                       },
                       icon: const Icon(Icons.edit_outlined, size: 18),
                       label: const Text('Editar Perfil'),
