@@ -10,13 +10,7 @@ import '../../features/auth/presentation/views/reset_password_view.dart';
 import '../../features/auth/presentation/views/signup_view.dart';
 import '../../features/auth/presentation/views/verify_otp_view.dart';
 
-import '../../features/home/presentation/views/detalles_view.dart';
-import '../../features/home/presentation/views/explora_feed_view.dart';
-import '../../features/home/presentation/views/explora_view.dart';
-import '../../features/home/presentation/views/reseñas_view.dart';
 import '../../features/home/presentation/views/swipe_screen.dart';
-
-import '../../features/pasaporte/presentation/views/passport_view.dart';
 
 import '../../features/perfil/domain/entities/profile.dart';
 import '../../features/perfil/presentation/views/edit_profile_view.dart';
@@ -25,6 +19,12 @@ import '../../features/perfil/presentation/views/profile_view.dart';
 import '../../features/utils/presentation/views/gatekeeper_view.dart';
 import '../../features/utils/presentation/views/onboarding_view.dart';
 import '../../features/utils/presentation/views/splash_view.dart';
+
+import '../../features/pasaporte/presentation/views/passport_view.dart';
+
+// IMPORTA AQUÍ LA PANTALLA REAL DEL MAPA.
+// Ejemplo:
+// import '../../features/mapa/presentation/views/map_view.dart';
 
 import '../widgets/main_scaffold.dart';
 
@@ -54,24 +54,56 @@ GoRouter router(Ref ref) {
     initialLocation: '/splash',
     refreshListenable: notifier,
 
+    errorBuilder: (context, state) {
+      return Scaffold(
+        body: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(24),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Icon(
+                  Icons.error_outline_rounded,
+                  size: 54,
+                ),
+                const SizedBox(height: 16),
+                const Text(
+                  'Ruta no encontrada',
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  state.uri.toString(),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 16),
+                FilledButton(
+                  onPressed: () => context.go('/home'),
+                  child: const Text('Volver al inicio'),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+    },
+
     redirect: (
         BuildContext context,
         GoRouterState state,
         ) {
-      final authState = ref.read(authViewModelProvider);
-
-      // Mientras Riverpod todavía resuelve la sesión,
-      // no forzamos una redirección prematura.
-      if (authState.isLoading) {
-        return null;
-      }
+      final authState = ref.read(
+        authViewModelProvider,
+      );
 
       final isAuthenticated =
           authState.asData?.value != null;
 
       final currentPath = state.matchedLocation;
 
-      // Splash controla su propia transición.
       if (currentPath == '/splash') {
         return null;
       }
@@ -86,18 +118,6 @@ GoRouter router(Ref ref) {
         '/reset-password',
       };
 
-      // Estas rutas son solo para visitantes.
-      // OJO: reset-password NO está aquí porque después de verificar
-      // el OTP Supabase puede crear una sesión válida y necesitamos
-      // permitir que el usuario llegue a ResetPasswordView.
-      const guestOnlyRoutes = <String>{
-        '/onboarding',
-        '/gatekeeper',
-        '/login',
-        '/register',
-        '/forgot-password',
-      };
-
       final isPublicRoute =
       publicRoutes.contains(currentPath);
 
@@ -105,57 +125,14 @@ GoRouter router(Ref ref) {
         return '/gatekeeper';
       }
 
-      if (isAuthenticated &&
-          guestOnlyRoutes.contains(currentPath)) {
+      if (isAuthenticated && isPublicRoute) {
         return '/home';
       }
 
       return null;
     },
 
-    errorBuilder: (context, state) {
-      return Scaffold(
-        body: SafeArea(
-          child: Center(
-            child: Padding(
-              padding: const EdgeInsets.all(24),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  const Icon(
-                    Icons.route_outlined,
-                    size: 56,
-                  ),
-                  const SizedBox(height: 16),
-                  const Text(
-                    'Ruta no encontrada',
-                    style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.w800,
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    state.uri.toString(),
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(height: 18),
-                  FilledButton(
-                    onPressed: () => context.go('/home'),
-                    child: const Text('Volver al inicio'),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
-      );
-    },
-
     routes: [
-      // ============================================================
-      // SPLASH / AUTH
-      // ============================================================
 
       GoRoute(
         path: '/splash',
@@ -209,9 +186,9 @@ GoRouter router(Ref ref) {
         path: '/verify-otp',
         name: 'verify_otp',
         builder: (context, state) {
-          final email = state.extra;
+          final email = state.extra as String?;
 
-          if (email is! String || email.isEmpty) {
+          if (email == null || email.isEmpty) {
             return const ForgotPasswordView();
           }
 
@@ -229,10 +206,7 @@ GoRouter router(Ref ref) {
         },
       ),
 
-      // ============================================================
-      // PERFIL
-      // Fuera del StatefulShellRoute para abrir sobre el shell.
-      // ============================================================
+
 
       GoRoute(
         path: '/profile',
@@ -246,58 +220,18 @@ GoRouter router(Ref ref) {
         path: '/edit-profile',
         name: 'edit_profile',
         builder: (context, state) {
-          final profile = state.extra;
+          final extra = state.extra;
 
-          if (profile is! Profile) {
+          if (extra is! Profile) {
             return const ProfileView();
           }
 
           return EditProfileView(
-            profile: profile,
+            profile: extra,
           );
         },
       ),
 
-      // ============================================================
-      // HOME / EXPLORACIÓN
-      // Estas rutas existen porque ya son usadas en tu código actual.
-      // ============================================================
-
-      GoRoute(
-        path: '/explora',
-        name: 'explora',
-        builder: (context, state) {
-          return const ExploraScreen();
-        },
-      ),
-
-      GoRoute(
-        path: '/explora-feed',
-        name: 'explora_feed',
-        builder: (context, state) {
-          return const ExploraFeedScreen();
-        },
-      ),
-
-      GoRoute(
-        path: '/detalles',
-        name: 'detalles',
-        builder: (context, state) {
-          return const DetallesScreen();
-        },
-      ),
-
-      GoRoute(
-        path: '/resenas',
-        name: 'resenas',
-        builder: (context, state) {
-          return const ResenasScreen();
-        },
-      ),
-
-      // ============================================================
-      // NAVEGACIÓN PRINCIPAL
-      // ============================================================
 
       StatefulShellRoute.indexedStack(
         builder: (
@@ -311,9 +245,7 @@ GoRouter router(Ref ref) {
         },
 
         branches: [
-          // --------------------------------------------------------
-          // 1. EXPLORAR
-          // --------------------------------------------------------
+
           StatefulShellBranch(
             routes: [
               GoRoute(
@@ -326,28 +258,19 @@ GoRouter router(Ref ref) {
             ],
           ),
 
-          // --------------------------------------------------------
-          // 2. MAPA
-          // En lib.zip NO existe una vista real del mapa.
-          // Solo existen mapa_providers.g.dart y mapa_viewmodel.g.dart.
-          // Esta ruta resuelve correctamente y puede sustituirse
-          // por la vista real cuando el equipo agregue el archivo.
-          // --------------------------------------------------------
+
           StatefulShellBranch(
             routes: [
               GoRoute(
                 path: '/mapa',
                 name: 'mapa',
                 builder: (context, state) {
-                  return const _MapUnavailableView();
+                  return const _MapRoutePlaceholder();
                 },
               ),
             ],
           ),
 
-          // --------------------------------------------------------
-          // 3. PASAPORTE
-          // --------------------------------------------------------
           StatefulShellBranch(
             routes: [
               GoRoute(
@@ -365,27 +288,17 @@ GoRouter router(Ref ref) {
   );
 }
 
-class _MapUnavailableView extends StatelessWidget {
-  const _MapUnavailableView();
+
+class _MapRoutePlaceholder extends StatelessWidget {
+  const _MapRoutePlaceholder();
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Padding(
-        padding: EdgeInsets.all(24),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(
-              Icons.map_outlined,
-              size: 56,
-            ),
-            SizedBox(height: 12),
-            Text(
-              'El módulo de mapa todavía no contiene una vista.',
-              textAlign: TextAlign.center,
-            ),
-          ],
+    return const Scaffold(
+      body: Center(
+        child: Icon(
+          Icons.map_outlined,
+          size: 64,
         ),
       ),
     );
