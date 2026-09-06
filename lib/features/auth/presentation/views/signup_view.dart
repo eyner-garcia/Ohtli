@@ -102,6 +102,7 @@ class _SignUpViewState extends ConsumerState<SignUpView> {
     final percentageInt = (_filledCount / 4 * 100).toInt();
 
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
