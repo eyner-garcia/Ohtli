@@ -10,7 +10,7 @@ import '../../features/auth/presentation/views/reset_password_view.dart';
 import '../../features/auth/presentation/views/signup_view.dart';
 import '../../features/auth/presentation/views/verify_otp_view.dart';
 
-import '../../features/home/presentation/views/swipe_screen.dart';
+//import '../../features/home/presentation/views/swipe_screen.dart';
 
 import '../../features/perfil/domain/entities/profile.dart';
 import '../../features/perfil/presentation/views/edit_profile_view.dart';
@@ -252,7 +252,7 @@ GoRouter router(Ref ref) {
                 path: '/home',
                 name: 'home',
                 builder: (context, state) {
-                  return const SwipeScreen();
+                  return const _MapRoutePlaceholder();
                 },
               ),
             ],
