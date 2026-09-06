@@ -5,6 +5,8 @@ class Profile {
   final int placesCount;
   final int routesCount;
   final int badgesCount;
+  final int sellosCount; // <--- AGREGAR
+  final int xpAcumulada; // <--- AGREGAR
   final DateTime? lastSyncedAt;
 
   Profile({
@@ -12,6 +14,8 @@ class Profile {
     required this.placesCount,
     required this.routesCount,
     required this.badgesCount,
+    this.sellosCount = 0,
+    this.xpAcumulada = 0,
     this.lastSyncedAt,
   });
 }
