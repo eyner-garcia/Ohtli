@@ -1,44 +1,40 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 
-class QuizScreen extends StatefulWidget {
-  const QuizScreen({super.key});
+class SwipeScreen extends StatefulWidget {
+  const SwipeScreen({super.key});
 
   @override
-  State<QuizScreen> createState() => _QuizScreenState();
+  State<SwipeScreen> createState() => _SwipeScreenState();
 }
 
-class _QuizScreenState extends State<QuizScreen> {
+class _SwipeScreenState extends State<SwipeScreen> {
   final CardSwiperController controller = CardSwiperController();
 
-  // Lista de preferencias para el selector
-  final List<Map<String, String>> preferencias = [
+  final List<Map<String, String>> categories = [
     {
-      'titulo': 'Turismo Comunitario',
-      'categoria': 'Cultura & Tradición',
-      'descripcion': 'Visita talleres artesanales y conoce a emprendedores locales de Matagalpa.',
-      'icono': '🏡',
+      'titulo': 'Naturaleza',
+      'descripcion': 'Parques, senderos, paisajes',
     },
     {
-      'titulo': 'Rutas de Café y Naturaleza',
-      'categoria': 'Ecoturismo',
-      'descripcion': 'Recorre fincas cafetaleras y senderos naturales en las montañas.',
-      'icono': '☕',
+      'titulo': 'Gastronomía',
+      'descripcion': 'Platillos típicos, sabores locales',
     },
     {
-      'titulo': 'Gastronomía Tradicional',
-      'categoria': 'Sabores Locales',
-      'descripcion': 'Prueba platillos típicos preparados por comedores comunitarios.',
-      'icono': '🍲',
+      'titulo': 'Cultura',
+      'descripcion': 'Museos, historia, tradiciones',
     },
     {
-      'titulo': 'Arte y Cerámica',
-      'categoria': 'Patrimonio Cultural',
-      'descripcion': 'Aprende sobre la elaboración de artesanías y cerámica tradicional.',
-      'icono': '🎨',
+      'titulo': 'Aventura',
+      'descripcion': 'Deportes extremos, exploración',
+    },
+    {
+      'titulo': 'Descanso',
+      'descripcion': 'Playas, relajación, bienestar',
     },
   ];
+
+  int currentIndex = 0;
 
   @override
   void dispose() {
@@ -53,173 +49,227 @@ class _QuizScreenState extends State<QuizScreen> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () => context.pop(),
+        leadingWidth: 100,
+        leading: Padding(
+          padding: const EdgeInsets.only(left: 16.0),
+          child: Center(
+            child: Text(
+              '9:41',
+              style: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
         ),
-        title: const Text(
-          'Configura tu Vibra 🌟',
-          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 18),
-        ),
-        centerTitle: true,
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 16.0),
+            child: Row(
+              children: List.generate(
+                3,
+                (index) => Container(
+                  width: 20,
+                  height: 8,
+                  margin: const EdgeInsets.symmetric(horizontal: 2),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF1A1C1E),
+                    borderRadius: BorderRadius.circular(2),
+                  ),
+                ),
+              ),
+            ),
+          )
+        ],
       ),
-      body: SafeArea(
-        child: Column(
-          children: [
-            const SizedBox(height: 10),
-            // Subtítulo instructivo
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 24.0),
-              child: Text(
-                'Desliza a la derecha para Aceptar o a la izquierda para Rechazar tus gustos de viaje.',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 14, color: Colors.black54),
-              ),
+      body: Column(
+        children: [
+          const SizedBox(height: 10),
+          const Text(
+            'Elige tus Intereses',
+            style: TextStyle(
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
+              color: Color(0xFF1A1C1E),
             ),
-            const SizedBox(height: 20),
-
-            // 🃏 Selector de Tarjetas estilo Tinder
-            Expanded(
-              child: CardSwiper(
-                controller: controller,
-                cardsCount: preferencias.length,
-                onSwipe: (previousIndex, currentIndex, direction) {
-                  return true; // Acepta el gesto de deslizamiento
-                },
-                onEnd: () {
-                  // Al agotar las tarjetas, navega al Home principal
-                  context.go('/home');
-                },
-                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
-                cardBuilder: (context, index, percentX, percentY) {
-                  final item = preferencias[index];
-                  return Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(24),
-                      border: Border.all(color: Colors.grey.shade300, width: 1.5),
-                      boxShadow: const [
-                        BoxShadow(
-                          color: Colors.black12,
-                          blurRadius: 12,
-                          offset: Offset(0, 6),
-                        )
-                      ],
-                    ),
-                    padding: const EdgeInsets.all(24),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        // Círculo con Ícono / Ilustración
-                        Container(
-                          width: 110,
-                          height: 110,
+          ),
+          const SizedBox(height: 40),
+          const Text(
+            'Desliza para elegir',
+            style: TextStyle(
+              fontSize: 16,
+              color: Colors.grey,
+            ),
+          ),
+          const SizedBox(height: 20),
+          Expanded(
+            child: CardSwiper(
+              controller: controller,
+              cardsCount: categories.length,
+              numberOfCardsDisplayed: 2,
+              backCardOffset: const Offset(20, 20),
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
+              onSwipe: (previousIndex, current, direction) {
+                setState(() {
+                  currentIndex = current ?? 0;
+                });
+                return true;
+              },
+              cardBuilder: (context, index, percentX, percentY) {
+                final category = categories[index];
+                return Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(color: const Color(0xFF1A1C1E), width: 1.5),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.05),
+                        blurRadius: 10,
+                        offset: const Offset(0, 5),
+                      ),
+                    ],
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: Container(
+                          margin: const EdgeInsets.all(12),
                           decoration: BoxDecoration(
-                            color: Colors.blue.shade50,
-                            shape: BoxShape.circle,
+                            color: const Color(0xFFF1F3F4),
+                            borderRadius: BorderRadius.circular(16),
                           ),
-                          alignment: Alignment.center,
-                          child: Text(
-                            item['icono']!,
-                            style: const TextStyle(fontSize: 55),
-                          ),
+                          // Espacio para la imagen
                         ),
-                        const SizedBox(height: 28),
-
-                        // Etiqueta de Categoría
-                        Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
-                          decoration: BoxDecoration(
-                            color: Colors.blue.shade100,
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: Text(
-                            item['categoria']!,
-                            style: const TextStyle(
-                              color: Colors.blueAccent,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 12,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(24, 0, 24, 32),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              category['titulo']!,
+                              style: const TextStyle(
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xFF1A1C1E),
+                              ),
                             ),
-                          ),
+                            const SizedBox(height: 8),
+                            Text(
+                              category['descripcion']!,
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.grey.shade600,
+                              ),
+                            ),
+                          ],
                         ),
-                        const SizedBox(height: 16),
-
-                        // Título
-                        Text(
-                          item['titulo']!,
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                            fontSize: 22,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black87,
-                          ),
-                        ),
-                        const SizedBox(height: 12),
-
-                        // Descripción
-                        Text(
-                          item['descripcion']!,
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                            fontSize: 14,
-                            color: Colors.black54,
-                            height: 1.4,
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
+          ),
+          const SizedBox(height: 20),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 40.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                _ActionButton(
+                  icon: Icons.arrow_back,
+                  label: 'No',
+                  onTap: () => controller.swipe(CardSwiperDirection.left),
+                ),
+                _ActionButton(
+                  icon: Icons.arrow_forward,
+                  label: 'Si',
+                  isRight: true,
+                  onTap: () => controller.swipe(CardSwiperDirection.right),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 40),
+          Text(
+            '${currentIndex + 1} de ${categories.length}',
+            style: const TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+              color: Color(0xFF1A1C1E),
+            ),
+          ),
+          const SizedBox(height: 12),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: List.generate(
+              categories.length,
+              (index) => Container(
+                width: index == currentIndex ? 24 : 8,
+                height: 8,
+                margin: const EdgeInsets.symmetric(horizontal: 4),
+                decoration: BoxDecoration(
+                  color: index == currentIndex
+                      ? const Color(0xFF1A1C1E)
+                      : const Color(0xFFE1E3E4),
+                  borderRadius: BorderRadius.circular(4),
+                ),
               ),
             ),
-
-            // 🔘 Botones Inferiores de Acción (Rechazar / Aceptar)
-            Padding(
-              padding: const EdgeInsets.only(bottom: 30, top: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  // Botón Rechazar (X)
-                  InkWell(
-                    onTap: () => controller.swipe(CardSwiperDirection.left),
-                    borderRadius: BorderRadius.circular(35),
-                    child: Container(
-                      width: 65,
-                      height: 65,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.white,
-                        border: Border.all(color: Colors.red.shade300, width: 2),
-                        boxShadow: const [
-                          BoxShadow(color: Colors.black12, blurRadius: 6),
-                        ],
-                      ),
-                      child: const Icon(Icons.close, color: Colors.red, size: 32),
-                    ),
-                  ),
-
-                  // Botón Aceptar (✓)
-                  InkWell(
-                    onTap: () => controller.swipe(CardSwiperDirection.right),
-                    borderRadius: BorderRadius.circular(35),
-                    child: Container(
-                      width: 65,
-                      height: 65,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.green,
-                        boxShadow: const [
-                          BoxShadow(color: Colors.black12, blurRadius: 6),
-                        ],
-                      ),
-                      child: const Icon(Icons.check, color: Colors.white, size: 32),
-                    ),
-                  ),
-                ],
-              ),
+          ),
+          const SizedBox(height: 40),
+          Container(
+            width: 140,
+            height: 5,
+            decoration: BoxDecoration(
+              color: Colors.black,
+              borderRadius: BorderRadius.circular(2.5),
             ),
-          ],
-        ),
+          ),
+          const SizedBox(height: 12),
+        ],
+      ),
+    );
+  }
+}
+
+class _ActionButton extends StatelessWidget {
+  final IconData icon;
+  final String label;
+  final VoidCallback onTap;
+  final bool isRight;
+
+  const _ActionButton({
+    required this.icon,
+    required this.label,
+    required this.onTap,
+    this.isRight = false,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      behavior: HitTestBehavior.opaque,
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          if (!isRight) Icon(icon, size: 24, color: const Color(0xFF1A1C1E)),
+          if (!isRight) const SizedBox(width: 8),
+          Text(
+            label,
+            style: const TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: Color(0xFF1A1C1E),
+            ),
+          ),
+          if (isRight) const SizedBox(width: 8),
+          if (isRight) Icon(icon, size: 24, color: const Color(0xFF1A1C1E)),
+        ],
       ),
     );
   }
