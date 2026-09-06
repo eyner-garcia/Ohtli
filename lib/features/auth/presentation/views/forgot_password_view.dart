@@ -49,6 +49,7 @@ class _ForgotPasswordViewState extends ConsumerState<ForgotPasswordView> {
     });
 
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
