@@ -38,7 +38,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF163323),
+      backgroundColor: const Color(0xFF004046),
       body: Center(
         child: AnimatedOpacity(
           duration: const Duration(seconds: 2),
@@ -51,7 +51,6 @@ class _SplashScreenState extends State<SplashScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // Ícono / Logo provisional
                 Container(
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(

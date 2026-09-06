@@ -29,8 +29,6 @@ class CustomDrawer extends ConsumerWidget {
         child: Column(
           children: [
             const SizedBox(height: 20),
-
-            // Sección de Perfil reactiva
             profileAsync.when(
               data: (profile) => _DrawerProfileHeader(
                 profile: profile,
@@ -41,8 +39,6 @@ class CustomDrawer extends ConsumerWidget {
             ),
 
             const SizedBox(height: 20),
-
-            // Opciones de Menú
             Expanded(
               child: _DrawerMenuList(
                 isDarkMode: isDarkMode,
@@ -77,7 +73,6 @@ class _DrawerProfileHeader extends ConsumerWidget {
       children: [
         Column(
           children: [
-            // Avatar e info clickeables para ver perfil
             InkWell(
               borderRadius: BorderRadius.circular(12),
               onTap: () {
@@ -124,30 +119,7 @@ class _DrawerProfileHeader extends ConsumerWidget {
                 ],
               ),
             ),
-
-            // Botón para editar perfil
-            TextButton(
-              onPressed: () {
-                onNavigateAfterPop(
-                  context,
-                      () => context.pushNamed(
-                    'edit_profile',
-                    extra: profile,
-                  ),
-                );
-              },
-              child: const Text(
-                'Editar Perfil',
-                style: TextStyle(
-                  decoration: TextDecoration.underline,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ),
-
             const SizedBox(height: 10),
-
-            // Tarjeta de estadísticas
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 16),
               padding: const EdgeInsets.symmetric(
@@ -180,8 +152,6 @@ class _DrawerProfileHeader extends ConsumerWidget {
             ),
           ],
         ),
-
-        // Botón de Refresh
         Positioned(
           top: 0,
           right: 12,
@@ -218,7 +188,6 @@ class _DrawerMenuList extends ConsumerWidget {
           trailing: const Icon(Icons.chevron_right),
           onTap: () {
             onNavigateAfterPop(context, () {
-              // TODO: context.pushNamed('trip_history');
             });
           },
         ),
@@ -228,7 +197,6 @@ class _DrawerMenuList extends ConsumerWidget {
           trailing: const Icon(Icons.chevron_right),
           onTap: () {
             onNavigateAfterPop(context, () {
-              // TODO: context.pushNamed('settings');
             });
           },
         ),
@@ -238,7 +206,6 @@ class _DrawerMenuList extends ConsumerWidget {
           trailing: const Icon(Icons.chevron_right),
           onTap: () {
             onNavigateAfterPop(context, () {
-              // TODO: context.pushNamed('premium');
             });
           },
         ),
@@ -325,10 +292,6 @@ class _StatItem extends StatelessWidget {
   }
 }
 
-// -----------------------------------------------------------------------------
-// SKELETON COMPONENTS
-// -----------------------------------------------------------------------------
-
 class _ProfileSkeleton extends StatelessWidget {
   const _ProfileSkeleton();
 
@@ -359,15 +322,6 @@ class _ProfileSkeleton extends StatelessWidget {
         Container(
           width: 120,
           height: 13,
-          decoration: BoxDecoration(
-            color: colorScheme.surfaceContainerHighest,
-            borderRadius: BorderRadius.circular(6),
-          ),
-        ),
-        const SizedBox(height: 14),
-        Container(
-          width: 100,
-          height: 16,
           decoration: BoxDecoration(
             color: colorScheme.surfaceContainerHighest,
             borderRadius: BorderRadius.circular(6),

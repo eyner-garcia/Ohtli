@@ -31,7 +31,7 @@ class _ForgotPasswordViewState extends ConsumerState<ForgotPasswordView> {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Te hemos enviado un código/enlace a tu correo'),
-          backgroundColor: Color(0xFF10B981),
+          backgroundColor: Color(0xFF84A98C),
         ),
       );
       context.push('/verify-otp', extra: email);
@@ -53,7 +53,7 @@ class _ForgotPasswordViewState extends ConsumerState<ForgotPasswordView> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Color(0xFF1E293B)),
+          icon: const Icon(Icons.arrow_back, color: Color(0xFF004046)),
           onPressed: () => context.pop(),
         ),
       ),
@@ -66,12 +66,12 @@ class _ForgotPasswordViewState extends ConsumerState<ForgotPasswordView> {
             children: [
               const Text(
                 'Recuperar contraseña',
-                style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold, color: Color(0xFF1E293B)),
+                style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold, color: Color(0xFF004046)),
               ),
               const SizedBox(height: 8),
               const Text(
                 'Ingresa tu correo electrónico y te enviaremos las instrucciones para restablecer tu contraseña.',
-                style: TextStyle(fontSize: 15, color: Color(0xFF64748B)),
+                style: TextStyle(fontSize: 15, color: Color(0xFF84A98C)),
               ),
               const SizedBox(height: 32),
 
@@ -89,7 +89,7 @@ class _ForgotPasswordViewState extends ConsumerState<ForgotPasswordView> {
                 height: 56,
                 child: FilledButton(
                   style: FilledButton.styleFrom(
-                    backgroundColor: const Color(0xFF1E293B),
+                    backgroundColor: const Color(0xFF004046),
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
                   ),
                   onPressed: authState.isLoading ? null : _submit,

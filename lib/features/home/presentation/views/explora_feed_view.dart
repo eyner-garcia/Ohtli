@@ -70,7 +70,7 @@ class _ExploraFeedScreenState extends ConsumerState<ExploraFeedScreen> {
               ),
               error: (_, __) => CircleAvatar(
                 radius: 20,
-                backgroundColor: isDark ? Colors.grey.shade800 : const Color(0xFFE9ECEF),
+                backgroundColor: isDark ? Colors.grey.shade800 : const Color(0xFFFBF8E3),
                 child: const Icon(Icons.person, color: Colors.grey, size: 20),
               ),
             ),
@@ -86,7 +86,6 @@ class _ExploraFeedScreenState extends ConsumerState<ExploraFeedScreen> {
           ),
         ),
         data: (state) {
-          // Combine popular and nearby without duplicates
           final allDestinations = [
             ...state.filteredPopular,
             ...state.filteredNearby,
@@ -97,7 +96,6 @@ class _ExploraFeedScreenState extends ConsumerState<ExploraFeedScreen> {
 
           return Column(
             children: [
-              // Search Bar
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Container(
@@ -132,8 +130,6 @@ class _ExploraFeedScreenState extends ConsumerState<ExploraFeedScreen> {
                   ),
                 ),
               ),
-
-              // Categories Chips
               SizedBox(
                 height: 40,
                 child: ListView(
@@ -165,8 +161,6 @@ class _ExploraFeedScreenState extends ConsumerState<ExploraFeedScreen> {
               ),
 
               const SizedBox(height: 16),
-
-              // Feed List
               Expanded(
                 child: allDestinations.isEmpty
                     ? const Center(
@@ -218,12 +212,12 @@ class _CategoryChip extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
         decoration: BoxDecoration(
           color: isActive
-              ? (isDark ? Colors.grey.shade200 : const Color(0xFF4A4A4A))
+              ? (isDark ? Colors.grey.shade200 : const Color(0xFF004046))
               : theme.cardColor,
           borderRadius: BorderRadius.circular(20),
           border: Border.all(
             color: isActive
-                ? (isDark ? Colors.grey.shade200 : const Color(0xFF4A4A4A))
+                ? (isDark ? Colors.grey.shade200 : const Color(0xFF004046))
                 : theme.dividerColor.withOpacity(0.2),
           ),
         ),
@@ -264,12 +258,11 @@ class _FeedCard extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Foto Placeholder
             Container(
               width: 80,
               height: 80,
               decoration: BoxDecoration(
-                color: isDark ? Colors.grey.shade800 : const Color(0xFFE9ECEF),
+                color: isDark ? Colors.grey.shade800 : const Color(0xFFFBF8E3),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: destination.imageUrl.isNotEmpty
@@ -328,7 +321,7 @@ class _FeedCard extends StatelessWidget {
                                 ? Icons.star
                                 : Icons.star_border,
                             size: 14,
-                            color: Colors.amber,
+                            color: Color(0xFFFEA94C),
                           ),
                         ),
                       ),
@@ -341,12 +334,20 @@ class _FeedCard extends StatelessWidget {
                           color: theme.textTheme.bodyLarge?.color,
                         ),
                       ),
-                    const Spacer(),
-                      Text(
-                        destination.distance.isNotEmpty
-                            ? destination.distance
-                            : '12 km',
-                        style: const TextStyle(fontSize: 12, color: Colors.grey),
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: Text(
+                          destination.distance.isNotEmpty
+                              ? destination.distance
+                              : '12 km',
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          textAlign: TextAlign.end,
+                          style: const TextStyle(
+                            fontSize: 12,
+                            color: Colors.grey,
+                          ),
+                        ),
                       ),
                     ],
                   ),

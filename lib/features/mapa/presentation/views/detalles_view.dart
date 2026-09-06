@@ -41,7 +41,7 @@ class DetallesMapaView extends StatelessWidget {
             onTap: () => context.pop(),
             child: Container(
               decoration: BoxDecoration(
-                color: isDark ? Colors.grey.shade800 : const Color(0xFFF1F3F4),
+                color: isDark ? Colors.grey.shade800 : const Color(0xFFFBF8E3),
                 shape: BoxShape.circle,
               ),
               child: Icon(Icons.chevron_left, color: theme.iconTheme.color),
@@ -63,7 +63,7 @@ class DetallesMapaView extends StatelessWidget {
               width: 40,
               height: 40,
               decoration: BoxDecoration(
-                color: isDark ? Colors.grey.shade800 : const Color(0xFFE9ECEF),
+                color: isDark ? Colors.grey.shade800 : const Color(0xFFFBF8E3),
                 shape: BoxShape.circle,
               ),
               child: const Center(
@@ -79,7 +79,6 @@ class DetallesMapaView extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Real Mini Map Preview
                 Container(
                   height: 220,
                   width: double.infinity,
@@ -111,13 +110,13 @@ class DetallesMapaView extends StatelessWidget {
                               point: route!.polylinePoints.first,
                               width: 30,
                               height: 30,
-                              child: const Icon(Icons.trip_origin, color: Colors.blue, size: 24),
+                              child: const Icon(Icons.trip_origin, color: Color(0xFF004046), size: 24),
                             ),
                             Marker(
                               point: route!.polylinePoints.last,
                               width: 30,
                               height: 30,
-                              child: const Icon(Icons.location_pin, color: Colors.redAccent, size: 30),
+                              child: const Icon(Icons.location_pin, color: Color(0xFFFEA94C), size: 30),
                             ),
                           ],
                         ],
@@ -125,8 +124,6 @@ class DetallesMapaView extends StatelessWidget {
                     ],
                   ),
                 ),
-
-                // Stats Row
                 Container(
                   padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 24),
                   decoration: BoxDecoration(
@@ -154,8 +151,6 @@ class DetallesMapaView extends StatelessWidget {
                     ],
                   ),
                 ),
-
-                // Indicaciones Paso a Paso
                 Padding(
                   padding: const EdgeInsets.all(24.0),
                   child: Column(
@@ -178,7 +173,7 @@ class DetallesMapaView extends StatelessWidget {
                               width: 32,
                               height: 32,
                               decoration: BoxDecoration(
-                                color: isDark ? Colors.grey.shade800 : const Color(0xFFE9ECEF),
+                                color: isDark ? Colors.grey.shade800 : const Color(0xFFFBF8E3),
                                 shape: BoxShape.circle,
                               ),
                               child: Center(
@@ -225,8 +220,6 @@ class DetallesMapaView extends StatelessWidget {
               ],
             ),
           ),
-
-          // Sticky Button "Iniciar Navegación"
           Align(
             alignment: Alignment.bottomCenter,
             child: Container(
@@ -245,7 +238,7 @@ class DetallesMapaView extends StatelessWidget {
                     );
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF131821),
+                    backgroundColor: const Color(0xFF004046),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),

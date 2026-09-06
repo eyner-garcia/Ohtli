@@ -207,8 +207,6 @@ GoRouter router(Ref ref) {
           return const ResetPasswordView();
         },
       ),
-
-      // Rutas fijas fuera del StatefulShellRoute para superponerse
       GoRoute(
         path: '/profile',
         name: 'profile',
@@ -271,8 +269,6 @@ GoRouter router(Ref ref) {
           return DetallesMapaView(route: route);
         },
       ),
-
-      // Shell para navegación inferior principal
       StatefulShellRoute.indexedStack(
         builder: (
           context,
@@ -285,7 +281,6 @@ GoRouter router(Ref ref) {
         },
 
         branches: [
-          // Rama 1: Explorar (Home)
           StatefulShellBranch(
             routes: [
               GoRoute(
@@ -295,8 +290,6 @@ GoRouter router(Ref ref) {
               ),
             ],
           ),
-
-          // Rama 2: Mapa
           StatefulShellBranch(
             routes: [
               GoRoute(
@@ -306,8 +299,6 @@ GoRouter router(Ref ref) {
               ),
             ],
           ),
-
-          // Rama 3: Pasaporte
           StatefulShellBranch(
             routes: [
               GoRoute(

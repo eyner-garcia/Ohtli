@@ -431,13 +431,6 @@ class _MapMarker {
     required this.y,
   });
 }
-
-/// Coordenadas normalizadas (0..1), no píxeles.
-/// Así los puntos conservan su posición en diferentes tamaños de pantalla.
-///
-/// Las dos regiones autónomas se incluyen por compatibilidad si existen
-/// en la tabla `departamentos`; si tu MVP usa solo los 15 departamentos,
-/// simplemente nunca se renderizan.
 const _markers = <_MapMarker>[
   _MapMarker(
     aliases: ['Nueva Segovia'],

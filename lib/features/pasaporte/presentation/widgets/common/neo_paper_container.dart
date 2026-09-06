@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
 class PassportPalette {
-  static const parchment = Color(0xFFF4E9D2);
-  static const paper = Color(0xFFFFF9EC);
-  static const ink = Color(0xFF2C2118);
-  static const leather = Color(0xFF70451F);
-  static const leatherDark = Color(0xFF45260F);
-  static const gold = Color(0xFFD1A23A);
-  static const green = Color(0xFF657B3B);
-  static const orange = Color(0xFFD98B25);
-  static const muted = Color(0xFF776B5D);
-  static const locked = Color(0xFFAAA49A);
-  static const reward = Color(0xFF8A531D);
+  static const parchment = Color(0xFFFBF8E3);
+  static const paper = Color(0xFFFBF8E3);
+  static const ink = Color(0xFF004046);
+  static const leather = Color(0xFF8C5C58);
+  static const leatherDark = Color(0xFF8C5C58);
+  static const gold = Color(0xFFFEA94C);
+  static const green = Color(0xFF84A98C);
+  static const orange = Color(0xFFFEA94C);
+  static const muted = Color(0xFF8C5C58);
+  static const locked = Color(0xFF84A98C);
+  static const reward = Color(0xFF8C5C58);
 }
 
 class NeoPaperContainer extends StatelessWidget {

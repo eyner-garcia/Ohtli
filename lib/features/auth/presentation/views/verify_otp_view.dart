@@ -56,7 +56,7 @@ class _VerifyOtpViewState extends ConsumerState<VerifyOtpView> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Color(0xFF1E293B)),
+          icon: const Icon(Icons.arrow_back, color: Color(0xFF004046)),
           onPressed: () => context.pop(),
         ),
       ),
@@ -67,12 +67,12 @@ class _VerifyOtpViewState extends ConsumerState<VerifyOtpView> {
           children: [
             const Text(
               'Verificar código',
-              style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold, color: Color(0xFF1E293B)),
+              style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold, color: Color(0xFF004046)),
             ),
             const SizedBox(height: 8),
             Text(
               'Ingresa el código de 6 dígitos que enviamos a ${widget.email}',
-              style: const TextStyle(fontSize: 15, color: Color(0xFF64748B)),
+              style: const TextStyle(fontSize: 15, color: Color(0xFF84A98C)),
             ),
             const SizedBox(height: 32),
 
@@ -111,7 +111,7 @@ class _VerifyOtpViewState extends ConsumerState<VerifyOtpView> {
               height: 56,
               child: FilledButton(
                 style: FilledButton.styleFrom(
-                  backgroundColor: const Color(0xFF1E293B),
+                  backgroundColor: const Color(0xFF004046),
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
                 ),
                 onPressed: authState.isLoading ? null : _verifyCode,

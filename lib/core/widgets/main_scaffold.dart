@@ -21,6 +21,8 @@ class MainScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -28,10 +30,19 @@ class MainScaffold extends StatelessWidget {
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         actions: [
-          IconButton(
-            icon: const Icon(Icons.notifications_outlined),
-            onPressed: () {
-            },
+          Padding(
+            padding: const EdgeInsets.only(right: 8),
+            child: IconButton(
+              tooltip: 'Notificaciones',
+              icon: const Icon(Icons.notifications_none_outlined),
+              style: IconButton.styleFrom(
+                shape: const CircleBorder(),
+                side: BorderSide(
+                  color: theme.colorScheme.outline.withValues(alpha: 0.45),
+                ),
+              ),
+              onPressed: () {},
+            ),
           ),
         ],
       ),

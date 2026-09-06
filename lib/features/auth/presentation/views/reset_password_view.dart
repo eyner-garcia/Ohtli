@@ -32,7 +32,7 @@ class _ResetPasswordViewState extends ConsumerState<ResetPasswordView> {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Contraseña actualizada correctamente'),
-          backgroundColor: Color(0xFF10B981),
+          backgroundColor: Color(0xFF84A98C),
         ),
       );
       context.go('/login');
@@ -64,12 +64,12 @@ class _ResetPasswordViewState extends ConsumerState<ResetPasswordView> {
             children: [
               const Text(
                 'Nueva contraseña',
-                style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold, color: Color(0xFF1E293B)),
+                style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold, color: Color(0xFF004046)),
               ),
               const SizedBox(height: 8),
               const Text(
                 'Tu nueva contraseña debe ser diferente a las anteriores.',
-                style: TextStyle(fontSize: 15, color: Color(0xFF64748B)),
+                style: TextStyle(fontSize: 15, color: Color(0xFF84A98C)),
               ),
               const SizedBox(height: 32),
 
@@ -105,7 +105,7 @@ class _ResetPasswordViewState extends ConsumerState<ResetPasswordView> {
                 height: 56,
                 child: FilledButton(
                   style: FilledButton.styleFrom(
-                    backgroundColor: const Color(0xFF1E293B),
+                    backgroundColor: const Color(0xFF004046),
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
                   ),
                   onPressed: authState.isLoading ? null : _updatePassword,

@@ -97,21 +97,21 @@ class _MapaViewState extends ConsumerState<MapaView> {
   }
 
   Widget _buildCategoryMarker(MapPointEntity point) {
-    Color markerColor = Colors.blue;
+    Color markerColor = const Color(0xFF004046);
     IconData markerIcon = Icons.place;
 
     final cat = point.category.toLowerCase();
     if (cat.contains('nat') || cat.contains('eco') || cat.contains('parque') || cat.contains('sender')) {
-      markerColor = Colors.green;
+      markerColor = const Color(0xFF84A98C);
       markerIcon = Icons.forest;
     } else if (cat.contains('cult') || cat.contains('trad') || cat.contains('hist') || cat.contains('arte')) {
-      markerColor = Colors.amber.shade800;
+      markerColor = const Color(0xFF8C5C58);
       markerIcon = Icons.account_balance;
     } else if (cat.contains('gast') || cat.contains('comid') || cat.contains('rest') || cat.contains('café')) {
-      markerColor = Colors.orange;
+      markerColor = const Color(0xFFFEA94C);
       markerIcon = Icons.restaurant;
     } else if (cat.contains('aven') || cat.contains('deport') || cat.contains('extre')) {
-      markerColor = Colors.redAccent;
+      markerColor = const Color(0xFF8C5C58);
       markerIcon = Icons.hiking;
     }
 
@@ -232,8 +232,6 @@ class _MapaViewState extends ConsumerState<MapaView> {
   Widget build(BuildContext context) {
     final mapaAsync = ref.watch(mapaViewModelProvider);
     final theme = Theme.of(context);
-
-    // Initialize selectedRoute if null and data is available
     mapaAsync.whenData((state) {
       if (selectedRoute == null && state.suggestedRoutes.isNotEmpty) {
         WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -247,7 +245,6 @@ class _MapaViewState extends ConsumerState<MapaView> {
     return Scaffold(
       body: Stack(
         children: [
-          // Map Layer
           mapaAsync.when(
             loading: () => const Center(child: CircularProgressIndicator()),
             error: (err, stack) => Center(child: Text('Error al cargar mapa: $err')),
@@ -262,7 +259,6 @@ class _MapaViewState extends ConsumerState<MapaView> {
                   urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
                   userAgentPackageName: 'com.sirius.sirius',
                 ),
-                // Polyline Layer for ONLY the currently selected active route
                 if (selectedRoute != null && selectedRoute!.polylinePoints.isNotEmpty)
                   PolylineLayer(
                     polylines: [
@@ -275,7 +271,6 @@ class _MapaViewState extends ConsumerState<MapaView> {
                   ),
                 MarkerLayer(
                   markers: [
-                    // User Real-time Location Marker
                     if (userLocation != null)
                       Marker(
                         point: userLocation!,
@@ -283,7 +278,7 @@ class _MapaViewState extends ConsumerState<MapaView> {
                         height: 48,
                         child: Container(
                           decoration: BoxDecoration(
-                            color: Colors.blue.withValues(alpha: 0.2),
+                            color: const Color(0xFF004046).withValues(alpha: 0.2),
                             shape: BoxShape.circle,
                           ),
                           child: Center(
@@ -291,7 +286,7 @@ class _MapaViewState extends ConsumerState<MapaView> {
                               width: 20,
                               height: 20,
                               decoration: BoxDecoration(
-                                color: Colors.blue,
+                                color: const Color(0xFF004046),
                                 shape: BoxShape.circle,
                                 border: Border.all(color: Colors.white, width: 3),
                                 boxShadow: [
@@ -305,7 +300,6 @@ class _MapaViewState extends ConsumerState<MapaView> {
                           ),
                         ),
                       ),
-                    // POI Categorized Markers
                     ...state.points.map((point) {
                       return Marker(
                         point: LatLng(point.latitude, point.longitude),
@@ -322,8 +316,6 @@ class _MapaViewState extends ConsumerState<MapaView> {
               ],
             ),
           ),
-
-          // Search / Buscar Ruta Bar at Top
           Positioned(
             top: MediaQuery.of(context).padding.top + 16,
             left: 24,
@@ -370,8 +362,6 @@ class _MapaViewState extends ConsumerState<MapaView> {
                 label: Text('Obteniendo ubicación...'),
               ),
             ),
-
-          // Draggable Bottom Sheet for Active Route & Suggested Routes
           DraggableScrollableSheet(
             initialChildSize: 0.28,
             minChildSize: 0.15,
@@ -395,7 +385,6 @@ class _MapaViewState extends ConsumerState<MapaView> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Drag handle
                       Center(
                         child: Container(
                           width: 40,
@@ -407,8 +396,6 @@ class _MapaViewState extends ConsumerState<MapaView> {
                         ),
                       ),
                       const SizedBox(height: 16),
-
-                      // Active Route Follow Banner
                       if (selectedRoute != null) ...[
                         Container(
                           padding: const EdgeInsets.all(16),
@@ -462,8 +449,6 @@ class _MapaViewState extends ConsumerState<MapaView> {
                         ),
                         const SizedBox(height: 20),
                       ],
-
-                      // Suggested Routes Section (Below active route)
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [

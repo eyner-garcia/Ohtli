@@ -105,7 +105,7 @@ class _PinInputState extends ConsumerState<_PinInput> {
             20,
           ),
           decoration: const BoxDecoration(
-            color: Color(0xFFF4E9D2),
+            color: Color(0xFFFBF8E3),
             borderRadius: BorderRadius.vertical(
               top: Radius.circular(30),
             ),

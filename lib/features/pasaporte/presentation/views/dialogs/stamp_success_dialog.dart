@@ -19,7 +19,7 @@ Future<StampSuccessAction?> showStampSuccessDialog(
       child: Container(
         padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
-          color: const Color(0xFFF4E9D2),
+          color: const Color(0xFFFBF8E3),
           borderRadius: BorderRadius.circular(28),
         ),
         child: Column(
@@ -31,7 +31,7 @@ Future<StampSuccessAction?> showStampSuccessDialog(
                 Icon(
                   Icons.verified_rounded,
                   size: 20,
-                  color: Color(0xFF8A531D),
+                  color: Color(0xFF8C5C58),
                 ),
                 SizedBox(width: 7),
                 Text(
@@ -50,14 +50,14 @@ Future<StampSuccessAction?> showStampSuccessDialog(
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 border: Border.all(
-                  color: const Color(0xFF8A531D),
+                  color: const Color(0xFF8C5C58),
                   width: 5,
                 ),
               ),
               child: const Icon(
                 Icons.workspace_premium_rounded,
                 size: 60,
-                color: Color(0xFF8A531D),
+                color: Color(0xFF8C5C58),
               ),
             ),
             const SizedBox(height: 15),
@@ -76,7 +76,7 @@ Future<StampSuccessAction?> showStampSuccessDialog(
               style: const TextStyle(
                 fontSize: 25,
                 fontWeight: FontWeight.w900,
-                color: Color(0xFF657B3B),
+                color: Color(0xFF84A98C),
               ),
             ),
             const SizedBox(height: 4),
@@ -84,7 +84,7 @@ Future<StampSuccessAction?> showStampSuccessDialog(
               'XP total: ${result.totalXp}',
               style: const TextStyle(
                 fontSize: 11,
-                color: Color(0xFF776B5D),
+                color: Color(0xFF8C5C58),
                 fontWeight: FontWeight.w700,
               ),
             ),
@@ -96,7 +96,7 @@ Future<StampSuccessAction?> showStampSuccessDialog(
                   Icon(
                     Icons.card_giftcard_rounded,
                     size: 18,
-                    color: Color(0xFF8A531D),
+                    color: Color(0xFF8C5C58),
                   ),
                   SizedBox(width: 6),
                   Text(
@@ -122,7 +122,7 @@ Future<StampSuccessAction?> showStampSuccessDialog(
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                     fontSize: 12,
-                    color: Color(0xFF776B5D),
+                    color: Color(0xFF8C5C58),
                   ),
                 ),
             ],

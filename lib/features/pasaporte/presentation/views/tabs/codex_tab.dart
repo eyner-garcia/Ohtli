@@ -110,7 +110,7 @@ class _BadgeCollection extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 17,
                   fontWeight: FontWeight.w900,
-                  color: Color(0xFF2C2118),
+                  color: Color(0xFF004046),
                 ),
               ),
             ),
@@ -119,7 +119,7 @@ class _BadgeCollection extends StatelessWidget {
               style: const TextStyle(
                 fontSize: 11,
                 fontWeight: FontWeight.w800,
-                color: Color(0xFF776B5D),
+                color: Color(0xFF8C5C58),
               ),
             ),
           ],
@@ -130,7 +130,7 @@ class _BadgeCollection extends StatelessWidget {
             child: Text(
               'Aún no hay insignias configuradas.',
               style: TextStyle(
-                color: Color(0xFF776B5D),
+                color: Color(0xFF8C5C58),
               ),
             ),
           )
@@ -186,7 +186,7 @@ class _CulturalCollection extends StatelessWidget {
           style: TextStyle(
             fontSize: 17,
             fontWeight: FontWeight.w900,
-            color: Color(0xFF2C2118),
+            color: Color(0xFF004046),
           ),
         ),
         const SizedBox(height: 10),
@@ -198,7 +198,7 @@ class _CulturalCollection extends StatelessWidget {
               'Sigue explorando para ampliar tu Códex.',
               style: TextStyle(
                 fontSize: 11,
-                color: Color(0xFF776B5D),
+                color: Color(0xFF8C5C58),
               ),
             ),
           )
@@ -229,7 +229,7 @@ class _CulturalCollection extends StatelessWidget {
             'tus visitas y el progreso de cada departamento.',
             style: TextStyle(
               fontSize: 11,
-              color: Color(0xFF776B5D),
+              color: Color(0xFF8C5C58),
             ),
           ),
         ),
@@ -255,7 +255,7 @@ class _CulturalCollection extends StatelessWidget {
             maxHeight: MediaQuery.sizeOf(sheetContext).height * .82,
           ),
           decoration: const BoxDecoration(
-            color: Color(0xFFF4E9D2),
+            color: Color(0xFFFBF8E3),
             borderRadius: BorderRadius.vertical(
               top: Radius.circular(28),
             ),
@@ -286,7 +286,7 @@ class _CulturalCollection extends StatelessWidget {
                     fontSize: 10,
                     letterSpacing: 1.2,
                     fontWeight: FontWeight.w900,
-                    color: Color(0xFF8A531D),
+                    color: Color(0xFF8C5C58),
                   ),
                 ),
                 const SizedBox(height: 6),
@@ -295,7 +295,7 @@ class _CulturalCollection extends StatelessWidget {
                   style: const TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.w900,
-                    color: Color(0xFF2C2118),
+                    color: Color(0xFF004046),
                   ),
                 ),
                 const SizedBox(height: 12),
@@ -304,7 +304,7 @@ class _CulturalCollection extends StatelessWidget {
                   style: const TextStyle(
                     fontSize: 14,
                     height: 1.5,
-                    color: Color(0xFF55493E),
+                    color: Color(0xFF8C5C58),
                   ),
                 ),
                 const SizedBox(height: 12),

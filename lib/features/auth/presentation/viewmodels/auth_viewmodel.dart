@@ -14,8 +14,6 @@ import '../../domain/usecases/verify_otp_usecase.dart';
 import '../../domain/usecases/update_password_usecase.dart';
 
 part 'auth_viewmodel.g.dart';
-
-// Capa de Datos
 @Riverpod(keepAlive: true)
 SupabaseClient supabaseClient(SupabaseClientRef ref) {
   return Supabase.instance.client;
@@ -30,8 +28,6 @@ AuthRemoteDataSource authRemoteDataSource(AuthRemoteDataSourceRef ref) {
 AuthRepository authRepository(AuthRepositoryRef ref) {
   return AuthRepositoryImpl(ref.watch(authRemoteDataSourceProvider));
 }
-
-// Capa de Dominio
 @Riverpod(keepAlive: true)
 LoginUseCase loginUseCase(LoginUseCaseRef ref) {
   return LoginUseCase(ref.watch(authRepositoryProvider));
@@ -61,8 +57,6 @@ VerifyOtpUseCase verifyOtpUseCase(VerifyOtpUseCaseRef ref) {
 UpdatePasswordUseCase updatePasswordUseCase(UpdatePasswordUseCaseRef ref) {
   return UpdatePasswordUseCase(ref.watch(authRepositoryProvider));
 }
-
-// Capa de Presentación
 @Riverpod(keepAlive: true)
 class AuthViewModel extends _$AuthViewModel {
   @override

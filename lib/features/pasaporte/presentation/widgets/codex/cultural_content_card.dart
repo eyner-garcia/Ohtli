@@ -52,7 +52,7 @@ class CulturalContentCard extends StatelessWidget {
                       fontSize: 8,
                       letterSpacing: 1.1,
                       fontWeight: FontWeight.w900,
-                      color: Color(0xFF8A531D),
+                      color: Color(0xFF8C5C58),
                     ),
                   ),
                   const SizedBox(height: 4),
@@ -63,7 +63,7 @@ class CulturalContentCard extends StatelessWidget {
                     style: const TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.w900,
-                      color: Color(0xFF2C2118),
+                      color: Color(0xFF004046),
                     ),
                   ),
                   if (resumen != null) ...[
@@ -74,7 +74,7 @@ class CulturalContentCard extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
                         fontSize: 10,
-                        color: Color(0xFF776B5D),
+                        color: Color(0xFF8C5C58),
                       ),
                     ),
                   ],
@@ -83,7 +83,7 @@ class CulturalContentCard extends StatelessWidget {
             ),
             const Icon(
               Icons.chevron_right_rounded,
-              color: Color(0xFF70451F),
+              color: Color(0xFF8C5C58),
             ),
           ],
         ),
@@ -98,11 +98,11 @@ class _CulturalPlaceholder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ColoredBox(
-      color: const Color(0xFFE2D4B8),
+      color: const Color(0xFFFBF8E3),
       child: Center(
         child: Icon(
           Icons.auto_stories_rounded,
-          color: const Color(0xFF70451F),
+          color: const Color(0xFF8C5C58),
           size: 30,
         ),
       ),

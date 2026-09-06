@@ -14,17 +14,16 @@ class GatekeeperView extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Spacer(),
-              // Logo
               Container(
                 padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
-                  color: const Color(0xFF2E7D32).withOpacity(0.1),
+                  color: const Color(0xFF84A98C).withOpacity(0.1),
                   shape: BoxShape.circle,
                 ),
                 child: const Icon(
                   Icons.explore,
                   size: 72,
-                  color: Color(0xFF2E7D32),
+                  color: Color(0xFF84A98C),
                 ),
               ),
               const SizedBox(height: 32),
@@ -33,7 +32,7 @@ class GatekeeperView extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFF1E293B),
+                  color: Color(0xFF004046),
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -42,7 +41,7 @@ class GatekeeperView extends StatelessWidget {
                 'Explora nuevos destinos.',
                 style: TextStyle(
                   fontSize: 16,
-                  color: Color(0xFF64748B),
+                  color: Color(0xFF84A98C),
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -52,7 +51,7 @@ class GatekeeperView extends StatelessWidget {
                 height: 56,
                 child: FilledButton(
                   style: FilledButton.styleFrom(
-                    backgroundColor: const Color(0xFF1E293B),
+                    backgroundColor: const Color(0xFF004046),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(14),
                     ),
@@ -67,7 +66,7 @@ class GatekeeperView extends StatelessWidget {
                 height: 56,
                 child: OutlinedButton(
                   style: OutlinedButton.styleFrom(
-                    side: const BorderSide(color: Color(0xFFCBD5E1), width: 1.5),
+                    side: const BorderSide(color: Color(0xFF84A98C), width: 1.5),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(14),
                     ),
@@ -75,7 +74,7 @@ class GatekeeperView extends StatelessWidget {
                   onPressed: () => context.push('/register'),
                   child: const Text(
                     'Crear cuenta',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Color(0xFF1E293B)),
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Color(0xFF004046)),
                   ),
                 ),
               ),

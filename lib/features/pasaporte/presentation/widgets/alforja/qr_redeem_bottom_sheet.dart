@@ -23,7 +23,7 @@ Future<void> showQrRedeemBottomSheet(
         ),
         child: Container(
           decoration: const BoxDecoration(
-            color: Color(0xFFF4E9D2),
+            color: Color(0xFFFBF8E3),
             borderRadius: BorderRadius.vertical(
               top: Radius.circular(30),
             ),
@@ -45,7 +45,7 @@ Future<void> showQrRedeemBottomSheet(
                       width: 42,
                       height: 4,
                       decoration: BoxDecoration(
-                        color: const Color(0xFFCABDA7),
+                        color: const Color(0xFF8C5C58),
                         borderRadius: BorderRadius.circular(99),
                       ),
                     ),
@@ -56,7 +56,7 @@ Future<void> showQrRedeemBottomSheet(
                         fontSize: 10,
                         letterSpacing: 1.7,
                         fontWeight: FontWeight.w900,
-                        color: Color(0xFF776B5D),
+                        color: Color(0xFF8C5C58),
                       ),
                     ),
                     const SizedBox(height: 8),
@@ -66,7 +66,7 @@ Future<void> showQrRedeemBottomSheet(
                       style: const TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.w900,
-                        color: Color(0xFF3E3024),
+                        color: Color(0xFF8C5C58),
                       ),
                     ),
                     if (redemption.reward.benefitDescription !=
@@ -77,7 +77,7 @@ Future<void> showQrRedeemBottomSheet(
                         textAlign: TextAlign.center,
                         style: const TextStyle(
                           fontSize: 12,
-                          color: Color(0xFF776B5D),
+                          color: Color(0xFF8C5C58),
                         ),
                       ),
                     ],
@@ -115,7 +115,7 @@ Future<void> showQrRedeemBottomSheet(
                         fontSize: 9,
                         letterSpacing: 1.5,
                         fontWeight: FontWeight.w800,
-                        color: Color(0xFF776B5D),
+                        color: Color(0xFF8C5C58),
                       ),
                     ),
                     const SizedBox(height: 4),
@@ -126,7 +126,7 @@ Future<void> showQrRedeemBottomSheet(
                         fontSize: 17,
                         letterSpacing: 2.2,
                         fontWeight: FontWeight.w900,
-                        color: Color(0xFF3E3024),
+                        color: Color(0xFF8C5C58),
                       ),
                     ),
                     if (redemption.expiresAt != null) ...[
@@ -137,7 +137,7 @@ Future<void> showQrRedeemBottomSheet(
                         textAlign: TextAlign.center,
                         style: const TextStyle(
                           fontSize: 10,
-                          color: Color(0xFF776B5D),
+                          color: Color(0xFF8C5C58),
                           fontWeight: FontWeight.w600,
                         ),
                       ),
@@ -151,7 +151,7 @@ Future<void> showQrRedeemBottomSheet(
                       style: TextStyle(
                         fontSize: 11,
                         height: 1.4,
-                        color: Color(0xFF776B5D),
+                        color: Color(0xFF8C5C58),
                       ),
                     ),
                     const SizedBox(height: 6),

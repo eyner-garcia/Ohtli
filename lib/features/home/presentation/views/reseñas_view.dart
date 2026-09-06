@@ -27,7 +27,7 @@ class ResenasScreen extends ConsumerWidget {
             onTap: () => context.pop(),
             child: Container(
               decoration: BoxDecoration(
-                color: isDark ? Colors.grey.shade800 : const Color(0xFFF1F3F4),
+                color: isDark ? Colors.grey.shade800 : const Color(0xFFFBF8E3),
                 shape: BoxShape.circle,
               ),
               child: Icon(Icons.chevron_left, color: theme.iconTheme.color),
@@ -72,7 +72,7 @@ class ResenasScreen extends ConsumerWidget {
               ),
               error: (_, __) => CircleAvatar(
                 radius: 20,
-                backgroundColor: isDark ? Colors.grey.shade800 : const Color(0xFFE9ECEF),
+                backgroundColor: isDark ? Colors.grey.shade800 : const Color(0xFFFBF8E3),
                 child: const Icon(Icons.person, color: Colors.grey, size: 20),
               ),
             ),
@@ -100,7 +100,6 @@ class ResenasScreen extends ConsumerWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Rating Summary Row
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -123,7 +122,7 @@ class ResenasScreen extends ConsumerWidget {
                                         ? Icons.star
                                         : Icons.star_border,
                                     size: 14,
-                                    color: Colors.amber,
+                                    color: Color(0xFFFEA94C),
                                   ),
                                 ),
                               ),
@@ -154,7 +153,6 @@ class ResenasScreen extends ConsumerWidget {
                       const SizedBox(height: 32),
                       Divider(color: theme.dividerColor),
                       const SizedBox(height: 16),
-                      // Reviews List
                       if (reviews.isEmpty)
                         Center(
                           child: Padding(
@@ -290,7 +288,7 @@ class _ReviewCard extends StatelessWidget {
                 width: 40,
                 height: 40,
                 decoration: BoxDecoration(
-                  color: isDark ? Colors.grey.shade800 : const Color(0xFFE9ECEF),
+                  color: isDark ? Colors.grey.shade800 : const Color(0xFFFBF8E3),
                   shape: BoxShape.circle,
                 ),
                 child: const Center(
@@ -325,7 +323,7 @@ class _ReviewCard extends StatelessWidget {
                   (index) => Icon(
                     index < rating.floor() ? Icons.star : Icons.star_border,
                     size: 14,
-                    color: Colors.amber,
+                    color: Color(0xFFFEA94C),
                   ),
                 ),
               ),

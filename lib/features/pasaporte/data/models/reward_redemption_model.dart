@@ -14,10 +14,6 @@ class RewardRedemptionModel extends RewardRedemption {
 
   factory RewardRedemptionModel.fromJson(Map<String, dynamic> json) {
     final rewardJson = Map<String, dynamic>.from(json['regalias'] as Map);
-
-    // El código y la expiración pertenecen al CANJE concreto, no a la
-    // definición general de la regalía. Los inyectamos en el modelo que
-    // consume la UI para que QR/Alforja sigan usando RewardUnlocked.
     rewardJson['codigo_canje'] = json['codigo_canje'];
     rewardJson['expira_en'] = json['expira_en'] ?? rewardJson['expira_en'];
 

@@ -77,7 +77,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           width: 130,
                           height: 130,
                           decoration: BoxDecoration(
-                            color: const Color(0xFF163323).withOpacity(0.08),
+                            color: Color(0xFF004046).withOpacity(0.08),
                             shape: BoxShape.circle,
                           ),
                           alignment: Alignment.center,
@@ -87,15 +87,13 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           ),
                         ),
                         const SizedBox(height: 36),
-
-                        // Título
                         Text(
                           slide['title']!,
                           textAlign: TextAlign.center,
                           style: const TextStyle(
                             fontSize: 26,
                             fontWeight: FontWeight.bold,
-                            color: Color(0xFF163323),
+                            color: Color(0xFF004046),
                           ),
                         ),
                         const SizedBox(height: 16),
@@ -131,7 +129,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         width: _currentPage == index ? 24 : 8,
                         decoration: BoxDecoration(
                           color: _currentPage == index
-                              ? const Color(0xFF163323)
+                              ? const Color(0xFF004046)
                               : Colors.grey.shade300,
                           borderRadius: BorderRadius.circular(4),
                         ),
@@ -155,7 +153,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         }
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF163323),
+                        backgroundColor: const Color(0xFF004046),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(14),
                         ),

@@ -33,12 +33,12 @@ class BadgeGridItem extends StatelessWidget {
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: unlocked
-                    ? const Color(0xFF657B3B).withOpacity(.16)
-                    : const Color(0xFFAAA49A).withOpacity(.18),
+                    ? const Color(0xFF84A98C).withOpacity(.16)
+                    : const Color(0xFF84A98C).withOpacity(.18),
                 border: Border.all(
                   color: unlocked
-                      ? const Color(0xFF657B3B)
-                      : const Color(0xFFAAA49A),
+                      ? const Color(0xFF84A98C)
+                      : const Color(0xFF84A98C),
                   width: 2,
                 ),
               ),
@@ -63,7 +63,7 @@ class BadgeGridItem extends StatelessWidget {
                     fontSize: 10,
                     height: 1.05,
                     fontWeight: FontWeight.w900,
-                    color: Color(0xFF2C2118),
+                    color: Color(0xFF004046),
                   ),
                 ),
               ),
@@ -77,7 +77,7 @@ class BadgeGridItem extends StatelessWidget {
               style: const TextStyle(
                 fontSize: 8,
                 height: 1,
-                color: Color(0xFF776B5D),
+                color: Color(0xFF8C5C58),
               ),
             ),
           ],
@@ -97,8 +97,8 @@ class _BadgeIcon extends StatelessWidget {
     return Icon(
       unlocked ? Icons.stars_rounded : Icons.lock_rounded,
       color: unlocked
-          ? const Color(0xFF657B3B)
-          : const Color(0xFFAAA49A),
+          ? const Color(0xFF84A98C)
+          : const Color(0xFF84A98C),
       size: 28,
     );
   }

@@ -28,15 +28,11 @@ class ProfileRepositoryImpl implements ProfileRepository {
     }
 
     Profile? cachedProfile;
-
-    //  Intentar leer cache
     try {
       cachedProfile = await localDataSource.getCachedProfile(authUser.id);
     } catch (_) {
       cachedProfile = null;
     }
-
-    // Determinar si cache es válida
     final isCacheValid =
         cachedProfile != null &&
             cachedProfile.lastSyncedAt != null &&
@@ -91,8 +87,6 @@ class ProfileRepositoryImpl implements ProfileRepository {
     if (authUser == null) throw Exception('Usuario no autenticado');
 
     final currentProfile = await getUserProfile();
-
-    // Subir a Supabase Storage
     final avatarUrl = await remoteDataSource.uploadAvatar(
       userId: currentProfile.user.id,
       imageFile: imageFile,

@@ -60,8 +60,6 @@ class PassportState {
   final int nivel;
   final int totalSellos;
   final int departamentosDescubiertos;
-
-  /// Recompensa recién desbloqueada. Solo sirve para feedback inmediato.
   final RewardUnlocked? recompensaDisponible;
 
   final PassportDepartmentState? departamentoActual;
@@ -281,9 +279,6 @@ class PassportViewModel extends _$PassportViewModel {
       recompensaDisponible:
           result.rewardUnlocked ? result.reward : null,
     );
-
-    // stamp_passport ya persistió sello, XP, insignias, contenido y
-    // recompensa. Rehidratamos para que las tres pestañas reflejen BD.
     Future.microtask(refreshAll);
   }
 

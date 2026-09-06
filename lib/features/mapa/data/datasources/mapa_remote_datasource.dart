@@ -50,8 +50,6 @@ class MapaRemoteDataSource {
         )).toList();
       }
     } catch (_) {}
-
-    // Mock fallback with real LatLng coordinates for polyline rendering
     return [
       RouteEntity(
         id: '1',

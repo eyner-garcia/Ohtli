@@ -91,8 +91,6 @@ class _EditProfileViewState extends ConsumerState<EditProfileView> {
     try {
       final newName = _nameController.text.trim();
       final hasNameChanged = newName != widget.profile.user.nombreCompleto;
-
-      // Llamada al método unificado
       await ref.read(profileViewModelProvider.notifier).updateProfile(
         newName: hasNameChanged ? newName : null,
         imageFile: _selectedImage,

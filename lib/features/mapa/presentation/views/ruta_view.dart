@@ -52,7 +52,7 @@ class _RutaViewState extends ConsumerState<RutaView> {
               width: 40,
               height: 40,
               decoration: BoxDecoration(
-                color: isDark ? Colors.grey.shade800 : const Color(0xFFE9ECEF),
+                color: isDark ? Colors.grey.shade800 : const Color(0xFFFBF8E3),
                 shape: BoxShape.circle,
               ),
               child: const Center(
@@ -67,7 +67,6 @@ class _RutaViewState extends ConsumerState<RutaView> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // DESDE
             const Text(
               'DESDE',
               style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.grey),
@@ -103,8 +102,6 @@ class _RutaViewState extends ConsumerState<RutaView> {
               ),
             ),
             const SizedBox(height: 20),
-
-            // HASTA
             const Text(
               'HASTA',
               style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.grey),
@@ -119,7 +116,7 @@ class _RutaViewState extends ConsumerState<RutaView> {
               ),
               child: Row(
                 children: [
-                  const Icon(Icons.location_on, color: Colors.redAccent, size: 20),
+                  const Icon(Icons.location_on, color: Color(0xFFFEA94C), size: 20),
                   const SizedBox(width: 12),
                   Expanded(
                     child: TextField(
@@ -135,8 +132,6 @@ class _RutaViewState extends ConsumerState<RutaView> {
               ),
             ),
             const SizedBox(height: 20),
-
-            // Transport Mode Chips
             Row(
               children: [
                 _TransportChip(
@@ -159,8 +154,6 @@ class _RutaViewState extends ConsumerState<RutaView> {
               ],
             ),
             const SizedBox(height: 28),
-
-            // Calcular Ruta Button
             SizedBox(
               width: double.infinity,
               height: 56,
@@ -174,7 +167,7 @@ class _RutaViewState extends ConsumerState<RutaView> {
                   }
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF131821),
+                  backgroundColor: const Color(0xFF004046),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),
@@ -190,8 +183,6 @@ class _RutaViewState extends ConsumerState<RutaView> {
               ),
             ),
             const SizedBox(height: 36),
-
-            // Rutas Recientes
             const Text(
               'Rutas Recientes',
               style: TextStyle(
@@ -242,12 +233,12 @@ class _TransportChip extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         decoration: BoxDecoration(
           color: isActive
-              ? (isDark ? Colors.grey.shade200 : const Color(0xFF131821))
+              ? (isDark ? Colors.grey.shade200 : const Color(0xFF004046))
               : theme.cardColor,
           borderRadius: BorderRadius.circular(20),
           border: Border.all(
             color: isActive
-                ? (isDark ? Colors.grey.shade200 : const Color(0xFF131821))
+                ? (isDark ? Colors.grey.shade200 : const Color(0xFF004046))
                 : theme.dividerColor.withOpacity(0.2),
           ),
         ),
@@ -292,7 +283,7 @@ class _RecentRouteCard extends StatelessWidget {
               width: 36,
               height: 36,
               decoration: BoxDecoration(
-                color: isDark ? Colors.grey.shade800 : const Color(0xFFE9ECEF),
+                color: isDark ? Colors.grey.shade800 : const Color(0xFFFBF8E3),
                 shape: BoxShape.circle,
               ),
               child: const Center(

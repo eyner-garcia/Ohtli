@@ -37,8 +37,6 @@ class ProfileViewModel extends _$ProfileViewModel {
   @override
   FutureOr<Profile> build() async {
     final repository = ref.watch(profileRepositoryProvider);
-
-    // Instanciar casos de uso internamente con el repositorio
     _getUserProfile = GetUserProfile(repository);
     _updateUserProfileUseCase = UpdateUserProfileUseCase(repository);
     _updateProfileAvatarUseCase = UpdateProfileAvatarUseCase(repository);
@@ -52,8 +50,6 @@ class ProfileViewModel extends _$ProfileViewModel {
           () => _getUserProfile(forceRefresh: true),
     );
   }
-
-  /// Método unificado para actualizar foto de perfil, nombre o ambos
   Future<void> updateProfile({String? newName, File? imageFile}) async {
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(() async {

@@ -98,7 +98,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
                     child: const Text(
                       '¿Olvidaste tu contraseña?',
                       style: TextStyle(
-                        color: Color(0xFF64748B),
+                        color: Color(0xFF84A98C),
                         decoration: TextDecoration.underline,
                       ),
                     ),
@@ -110,7 +110,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
                   height: 56,
                   child: FilledButton(
                     style: FilledButton.styleFrom(
-                      backgroundColor: const Color(0xFF1E293B),
+                      backgroundColor: const Color(0xFF004046),
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                     ),
                     onPressed: authState.isLoading ? null : _submit,
@@ -133,7 +133,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           decoration: TextDecoration.underline,
-                          color: Color(0xFF1E293B),
+                          color: Color(0xFF004046),
                         ),
                       ),
                     ),

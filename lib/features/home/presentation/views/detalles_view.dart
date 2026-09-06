@@ -24,16 +24,14 @@ class DetallesScreen extends StatelessWidget {
       backgroundColor: theme.scaffoldBackgroundColor,
       body: Stack(
         children: [
-          // Content
           SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Imagen Destacada
                 Container(
                   height: 300,
                   width: double.infinity,
-                  color: isDark ? Colors.grey.shade800 : const Color(0xFFE9ECEF),
+                  color: isDark ? Colors.grey.shade800 : const Color(0xFFFBF8E3),
                   child: destination?.imageUrl.isNotEmpty == true
                       ? Image.network(
                           destination!.imageUrl,
@@ -51,7 +49,6 @@ class DetallesScreen extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Título
                       Text(
                         title,
                         style: TextStyle(
@@ -61,22 +58,24 @@ class DetallesScreen extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 8),
-                      // Ubicación
                       Row(
                         children: [
                           const Icon(Icons.location_on, size: 16, color: Colors.grey),
                           const SizedBox(width: 6),
-                          Text(
-                            location,
-                            style: const TextStyle(
-                              fontSize: 14,
-                              color: Colors.grey,
+                          Expanded(
+                            child: Text(
+                              location,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(
+                                fontSize: 14,
+                                color: Colors.grey,
+                              ),
                             ),
                           ),
                         ],
                       ),
                       const SizedBox(height: 16),
-                      // Rating
                       Row(
                         children: [
                           Row(
@@ -87,7 +86,7 @@ class DetallesScreen extends StatelessWidget {
                                     ? Icons.star
                                     : Icons.star_border,
                                 size: 18,
-                                color: Colors.amber,
+                                color: Color(0xFFFEA94C),
                               ),
                             ),
                           ),
@@ -112,7 +111,6 @@ class DetallesScreen extends StatelessWidget {
                         ],
                       ),
                       const SizedBox(height: 24),
-                      // Descripción
                       Text(
                         description,
                         style: TextStyle(
@@ -122,7 +120,6 @@ class DetallesScreen extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 32),
-                      // Galería
                       const Text(
                         'Galería de Fotos',
                         style: TextStyle(
@@ -150,7 +147,7 @@ class DetallesScreen extends StatelessWidget {
                                       width: 100,
                                       color: isDark
                                           ? Colors.grey.shade800
-                                          : const Color(0xFFE9ECEF),
+                                          : const Color(0xFFFBF8E3),
                                       child: const Center(
                                           child: Icon(Icons.image,
                                               color: Colors.grey)),
@@ -168,7 +165,7 @@ class DetallesScreen extends StatelessWidget {
                                   decoration: BoxDecoration(
                                     color: isDark
                                         ? Colors.grey.shade800
-                                        : const Color(0xFFE9ECEF),
+                                        : const Color(0xFFFBF8E3),
                                     borderRadius: BorderRadius.circular(12),
                                   ),
                                   child: const Center(
@@ -178,7 +175,6 @@ class DetallesScreen extends StatelessWidget {
                               ),
                       ),
                       const SizedBox(height: 32),
-                      // Botón Ver Reseñas
                       SizedBox(
                         width: double.infinity,
                         height: 56,
@@ -207,7 +203,6 @@ class DetallesScreen extends StatelessWidget {
               ],
             ),
           ),
-          // Botón de Regreso (Sticky)
           SafeArea(
             child: Padding(
               padding: const EdgeInsets.all(16.0),
@@ -232,7 +227,6 @@ class DetallesScreen extends StatelessWidget {
               ),
             ),
           ),
-          // Botón Inferior "Cómo Llegar"
           Align(
             alignment: Alignment.bottomCenter,
             child: Container(
@@ -246,7 +240,6 @@ class DetallesScreen extends StatelessWidget {
                 height: 64,
                 child: ElevatedButton(
                   onPressed: () {
-                    // Acción cómo llegar
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: theme.colorScheme.primary,

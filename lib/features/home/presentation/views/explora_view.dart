@@ -42,7 +42,6 @@ class ExploraView extends ConsumerWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Header: Saludo y Notificaciones
                   Row(
                     children: [
                       profileAsync.when(
@@ -74,57 +73,52 @@ class ExploraView extends ConsumerWidget {
                         ),
                       ),
                       const SizedBox(width: 12),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            '¡Hola!',
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: Colors.grey,
-                            ),
-                          ),
-                          profileAsync.when(
-                            data: (profile) => Text(
-                              profile.user.nombreCompleto.split(' ').first,
-                              style: const TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            loading: () => const Text(
-                              'Cargando...',
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                              '¡Hola!',
                               style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
+                                fontSize: 14,
+                                color: Colors.grey,
                               ),
                             ),
-                            error: (_, __) => const Text(
-                              'Explorador',
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
+                            profileAsync.when(
+                              data: (profile) => Text(
+                                profile.user.nombreCompleto.split(' ').first,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: const TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              loading: () => const Text(
+                                'Cargando...',
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              error: (_, __) => const Text(
+                                'Explorador',
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                      const Spacer(),
-                      IconButton(
-                        onPressed: () {
-                          // TODO: Abrir notificaciones
-                        },
-                        icon: const Icon(Icons.notifications_none_outlined),
-                        style: IconButton.styleFrom(
-                          shape: const CircleBorder(),
-                          side: BorderSide(color: Colors.grey.shade300),
+                          ],
                         ),
                       ),
                     ],
                   ),
                   const SizedBox(height: 24),
-
-                  // Search Bar (Interactive)
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     height: 52,
@@ -157,18 +151,20 @@ class ExploraView extends ConsumerWidget {
                     ),
                   ),
                   const SizedBox(height: 28),
-
-                  // Destinos Populares Section
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text(
-                        'Destinos Populares',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
+                      const Expanded(
+                        child: Text(
+                          'Destinos Populares',
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
+                      const SizedBox(width: 12),
                       InkWell(
                         onTap: () => context.push('/explora-feed'),
                         child: Text(
@@ -184,8 +180,6 @@ class ExploraView extends ConsumerWidget {
                     ],
                   ),
                   const SizedBox(height: 16),
-
-                  // Popular Destinations Horizontal List
                   SizedBox(
                     height: 210,
                     child: state.filteredPopular.isEmpty
@@ -203,8 +197,6 @@ class ExploraView extends ConsumerWidget {
                           ),
                   ),
                   const SizedBox(height: 28),
-
-                  // Cerca de Ti Section
                   const Text(
                     'Cerca de Ti',
                     style: TextStyle(
@@ -213,8 +205,6 @@ class ExploraView extends ConsumerWidget {
                     ),
                   ),
                   const SizedBox(height: 16),
-
-                  // Nearby Vertical List
                   state.filteredNearby.isEmpty
                       ? const Center(
                           child: Text('No se encontraron lugares cercanos'))
@@ -273,9 +263,28 @@ class _PopularCard extends StatelessWidget {
                   color: Colors.grey.shade200,
                   borderRadius: BorderRadius.circular(12),
                 ),
-                child: const Center(
-                  child: Icon(Icons.image_outlined, color: Colors.grey),
-                ),
+                child: destination.imageUrl.isNotEmpty
+                    ? ClipRRect(
+                        borderRadius: BorderRadius.circular(12),
+                        child: Image.network(
+                          destination.imageUrl,
+                          width: double.infinity,
+                          height: double.infinity,
+                          fit: BoxFit.cover,
+                          errorBuilder: (_, __, ___) => const Center(
+                            child: Icon(
+                              Icons.image_outlined,
+                              color: Colors.grey,
+                            ),
+                          ),
+                        ),
+                      )
+                    : const Center(
+                        child: Icon(
+                          Icons.image_outlined,
+                          color: Colors.grey,
+                        ),
+                      ),
               ),
             ),
             Padding(
@@ -353,9 +362,28 @@ class _NearbyCard extends StatelessWidget {
                 color: Colors.grey.shade200,
                 borderRadius: BorderRadius.circular(12),
               ),
-              child: const Center(
-                child: Icon(Icons.image_outlined, color: Colors.grey),
-              ),
+              child: destination.imageUrl.isNotEmpty
+                  ? ClipRRect(
+                      borderRadius: BorderRadius.circular(12),
+                      child: Image.network(
+                        destination.imageUrl,
+                        width: 64,
+                        height: 64,
+                        fit: BoxFit.cover,
+                        errorBuilder: (_, __, ___) => const Center(
+                          child: Icon(
+                            Icons.image_outlined,
+                            color: Colors.grey,
+                          ),
+                        ),
+                      ),
+                    )
+                  : const Center(
+                      child: Icon(
+                        Icons.image_outlined,
+                        color: Colors.grey,
+                      ),
+                    ),
             ),
             const SizedBox(width: 16),
             Expanded(
@@ -364,6 +392,8 @@ class _NearbyCard extends StatelessWidget {
                 children: [
                   Text(
                     destination.title,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 15,
@@ -374,6 +404,8 @@ class _NearbyCard extends StatelessWidget {
                     destination.distance.isNotEmpty
                         ? destination.distance
                         : destination.location,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                     style: const TextStyle(
                       fontSize: 13,
                       color: Colors.grey,

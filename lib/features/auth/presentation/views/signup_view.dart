@@ -106,7 +106,7 @@ class _SignUpViewState extends ConsumerState<SignUpView> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Color(0xFF1E293B)),
+          icon: const Icon(Icons.arrow_back, color: Color(0xFF004046)),
           onPressed: () {
             if (_currentStep == 2) {
               _prevStep();
@@ -129,13 +129,13 @@ class _SignUpViewState extends ConsumerState<SignUpView> {
                   style: TextStyle(
                     fontSize: 26,
                     fontWeight: FontWeight.bold,
-                    color: Color(0xFF1E293B),
+                    color: Color(0xFF004046),
                   ),
                 ),
                 const SizedBox(height: 8),
                 const Text(
                   'Crea una cuenta para registrar y descubrir nuevos horizontes.',
-                  style: TextStyle(fontSize: 15, color: Color(0xFF64748B)),
+                  style: TextStyle(fontSize: 15, color: Color(0xFF84A98C)),
                 ),
                 const SizedBox(height: 24),
 
@@ -147,7 +147,7 @@ class _SignUpViewState extends ConsumerState<SignUpView> {
                       style: const TextStyle(
                         fontSize: 13,
                         fontWeight: FontWeight.w600,
-                        color: Color(0xFF1E293B),
+                        color: Color(0xFF004046),
                       ),
                     ),
                     Text(
@@ -156,7 +156,7 @@ class _SignUpViewState extends ConsumerState<SignUpView> {
                         fontSize: 13,
                         fontStyle: FontStyle.italic, // Texto de progreso en cursiva
                         fontWeight: FontWeight.w600,
-                        color: Color(0xFF64748B),
+                        color: Color(0xFF84A98C),
                       ),
                     ),
                   ],
@@ -202,7 +202,7 @@ class _SignUpViewState extends ConsumerState<SignUpView> {
                     height: 56,
                     child: FilledButton(
                       style: FilledButton.styleFrom(
-                        backgroundColor: const Color(0xFF1E293B),
+                        backgroundColor: const Color(0xFF004046),
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
                       ),
                       onPressed: _nextStep,
@@ -243,11 +243,11 @@ class _SignUpViewState extends ConsumerState<SignUpView> {
                           height: 56,
                           child: OutlinedButton(
                             style: OutlinedButton.styleFrom(
-                              side: const BorderSide(color: Color(0xFF1E293B)),
+                              side: const BorderSide(color: Color(0xFF004046)),
                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
                             ),
                             onPressed: _prevStep,
-                            child: const Text('Atrás', style: TextStyle(fontSize: 16, color: Color(0xFF1E293B))),
+                            child: const Text('Atrás', style: TextStyle(fontSize: 16, color: Color(0xFF004046))),
                           ),
                         ),
                       ),
@@ -258,7 +258,7 @@ class _SignUpViewState extends ConsumerState<SignUpView> {
                           height: 56,
                           child: FilledButton(
                             style: FilledButton.styleFrom(
-                              backgroundColor: const Color(0xFF1E293B),
+                              backgroundColor: const Color(0xFF004046),
                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
                             ),
                             onPressed: isLoading ? null : _submit,
@@ -276,12 +276,12 @@ class _SignUpViewState extends ConsumerState<SignUpView> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text('¿Ya tienes cuenta?', style: TextStyle(color: Color(0xFF64748B))),
+                    const Text('¿Ya tienes cuenta?', style: TextStyle(color: Color(0xFF84A98C))),
                     TextButton(
                       onPressed: () => context.pushReplacement('/login'),
                       child: const Text(
                         'Inicia sesión',
-                        style: TextStyle(fontWeight: FontWeight.bold, color: Color(0xFF1E293B)),
+                        style: TextStyle(fontWeight: FontWeight.bold, color: Color(0xFF004046)),
                       ),
                     ),
                   ],
@@ -298,7 +298,7 @@ class _SignUpViewState extends ConsumerState<SignUpView> {
     return Container(
       height: 6,
       decoration: BoxDecoration(
-        color: isCompleted ? const Color(0xFF10B981) : const Color(0xFFE2E8F0), // Verde esmeralda si está listo, gris si falta
+        color: isCompleted ? const Color(0xFF84A98C) : const Color(0xFF84A98C), // Verde esmeralda si está listo, gris si falta
         borderRadius: BorderRadius.circular(4),
       ),
     );

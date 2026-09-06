@@ -57,8 +57,6 @@ class ExploraViewModel extends _$ExploraViewModel {
     } catch (_) {
       nearby = [];
     }
-
-    // Fallback mock data if empty (so app never breaks and always looks great)
     final popularList = popular.isNotEmpty ? popular : [
       DestinationEntity(
         id: '1',

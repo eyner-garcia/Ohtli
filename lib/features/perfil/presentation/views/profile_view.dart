@@ -39,7 +39,6 @@ class ProfileView extends ConsumerWidget {
           return ListView(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
             children: [
-              // --- HEADER DE USUARIO ---
               Center(
                 child: Column(
                   children: [
@@ -140,8 +139,6 @@ class ProfileView extends ConsumerWidget {
               ),
 
               const SizedBox(height: 24),
-
-              // --- ACCESO DESTACADO AL PASAPORTE EN EL BOTTOM NAV ---
               Card(
                 elevation: 0,
                 color: Theme.of(context)
@@ -174,15 +171,12 @@ class ProfileView extends ConsumerWidget {
                   ),
                   trailing: const Icon(Icons.arrow_forward_ios_rounded, size: 16),
                   onTap: () {
-                    // Cambia a la rama del Pasaporte en el BottomNavigationBar
                     context.go('/pasaporte');
                   },
                 ),
               ),
 
               const SizedBox(height: 24),
-
-              // --- ESTADÍSTICAS RÁPIDAS ---
               Row(
                 children: [
                   Expanded(
@@ -204,8 +198,6 @@ class ProfileView extends ConsumerWidget {
               ),
 
               const SizedBox(height: 24),
-
-              // --- CONFIGURACIÓN & CUENTA ---
               const Text(
                 'Ajustes de Cuenta',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
