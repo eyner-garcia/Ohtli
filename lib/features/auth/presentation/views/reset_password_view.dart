@@ -50,11 +50,10 @@ class _ResetPasswordViewState extends ConsumerState<ResetPasswordView> {
     });
 
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        automaticallyImplyLeading: false, // Evitar volver atrás a la verificación OTP
+        automaticallyImplyLeading: false,
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12),

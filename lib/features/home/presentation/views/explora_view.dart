@@ -1,338 +1,383 @@
 import 'package:flutter/material.dart';
-// Importa go_router si vas a habilitar la navegación
-// import 'package:go_router/go_router.dart';
+import 'package:go_router/go_router.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class ExploraScreen extends StatelessWidget {
+  const ExploraScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // Color principal del diseño (verde oscuro/azul marino)
-    const primaryColor = Color(0xFF163323);
-
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: const Color(0xFFF8F9FB),
       body: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // 1. Cabecera (Bienvenida y Perfil)
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
+        child: Column(
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                  child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
-                      Text(
-                        'Buenas tardes,',
-                        style: TextStyle(fontSize: 14, color: Colors.black54),
+                    children: [
+                      const SizedBox(height: 20),
+                      // Header: ¡Hola! Usuario + Notification Bell
+                      Row(
+                        children: [
+                          Container(
+                            width: 48,
+                            height: 48,
+                            decoration: const BoxDecoration(
+                              color: Color(0xFFD9DDE2),
+                              shape: BoxShape.circle,
+                            ),
+                          ),
+                          const SizedBox(width: 12),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: const [
+                              Text(
+                                '¡Hola!',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  color: Colors.grey,
+                                ),
+                              ),
+                              Text(
+                                'Usuario',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color(0xFF1A1C1E),
+                                ),
+                              ),
+                            ],
+                          ),
+                          const Spacer(),
+                          Container(
+                            width: 44,
+                            height: 44,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              shape: BoxShape.circle,
+                              border: Border.all(color: Colors.grey.shade200),
+                            ),
+                            child: const Icon(
+                              Icons.notifications_none_outlined,
+                              color: Color(0xFF1A1C1E),
+                            ),
+                          ),
+                        ],
                       ),
-                      Text(
-                        'Explorador',
+                      const SizedBox(height: 24),
+                      // Search Bar
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        height: 56,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(color: Colors.grey.shade200),
+                        ),
+                        child: Row(
+                          children: const [
+                            Icon(Icons.search, color: Colors.grey),
+                            SizedBox(width: 12),
+                            Text(
+                              '¿A dónde quieres viajar hoy?',
+                              style: TextStyle(color: Colors.grey, fontSize: 16),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 32),
+                      // Destinos Populares Section
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text(
+                            'Destinos Populares',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xFF1A1C1E),
+                            ),
+                          ),
+                          InkWell(
+                            onTap: () => context.push('/explora-feed'),
+                            child: const Text(
+                              'Ver todos',
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xFF425C70),
+                                decoration: TextDecoration.underline,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 20),
+                      // Popular Destinations List
+                      SizedBox(
+                        height: 200,
+                        child: ListView(
+                          scrollDirection: Axis.horizontal,
+                          children: const [
+                            _PopularCard(
+                              title: 'Machu Picchu',
+                              subtitle: 'Destino, País',
+                            ),
+                            SizedBox(width: 16),
+                            _PopularCard(
+                              title: 'París, Francia',
+                              subtitle: 'Destino, País',
+                            ),
+                            SizedBox(width: 16),
+                            _PopularCard(
+                              title: 'Gran...',
+                              subtitle: 'Destino, País',
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 32),
+                      // Cerca de Ti Section
+                      const Text(
+                        'Cerca de Ti',
                         style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black),
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF1A1C1E),
+                        ),
                       ),
+                      const SizedBox(height: 20),
+                      // Nearby List
+                      const _NearbyCard(
+                        title: 'Parque Nacional de Aventura',
+                        subtitle: 'A 1.5 km de distancia • 4.7',
+                      ),
+                      const SizedBox(height: 16),
+                      const _NearbyCard(
+                        title: 'Museo de Historia Natural',
+                        subtitle: 'A 1.5 km de distancia • 4.7',
+                      ),
+                      const SizedBox(height: 20),
                     ],
                   ),
-                  const CircleAvatar(
-                    radius: 26,
-                    // Reemplazar con imagen real si tienes
-                    backgroundColor: primaryColor,
-                    child: Icon(Icons.person, color: Colors.white, size: 30),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 16),
-
-              // 2. Título de la App (Ohtli)
-              const Text(
-                'Ohtli',
-                style: TextStyle(
-                  fontSize: 32,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 2.0,
-                  color: primaryColor,
                 ),
               ),
-              const SizedBox(height: 24),
-
-              // 3. Sección: Circuitos Recomendados (Título y Ver todos)
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text(
-                    'Circuitos Recomendados',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
-                  TextButton.icon(
-                    onPressed: () {},
-                    icon: const Icon(Icons.arrow_forward, size: 16, color: Colors.grey),
-                    label: const Text(
-                      'Ver todos',
-                      style: TextStyle(color: Colors.grey, fontSize: 12),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 16),
-
-              // 4. Lista Horizontal de Circuitos Recomendados
-              SizedBox(
-                height: 220,
-                child: ListView.separated(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 3, // Mock data
-                  separatorBuilder: (context, index) => const SizedBox(width: 16),
-                  itemBuilder: (context, index) {
-                    return const RecommendedCircuitCard();
-                  },
-                ),
-              ),
-              const SizedBox(height: 32),
-
-              // 5. Sección: Tu siguiente aventura (Título y Ver todos)
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text(
-                    'Tu siguiente aventura',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
-                  TextButton.icon(
-                    onPressed: () {},
-                    icon: const Icon(Icons.arrow_forward, size: 16, color: Colors.grey),
-                    label: const Text(
-                      'Ver todos',
-                      style: TextStyle(color: Colors.grey, fontSize: 12),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 16),
-
-              // 6. Lista Vertical de Aventuras
-              ListView.separated(
-                physics: const NeverScrollableScrollPhysics(), // Evita conflicto de scroll
-                shrinkWrap: true,
-                itemCount: 2, // Mock data
-                separatorBuilder: (context, index) => const SizedBox(height: 16),
-                itemBuilder: (context, index) {
-                  return const NextAdventureCard();
-                },
-              ),
-              const SizedBox(height: 16),
-            ],
-          ),
-        ),
-      ),
-
-      // 7. Barra de Navegación Inferior (BottomNavigationBar)
-      /* BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        backgroundColor: Colors.white,
-        selectedItemColor: primaryColor,
-        unselectedItemColor: Colors.grey,
-        currentIndex: 0, // Índice activo por defecto
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Inicio',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            label: 'Explorar',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.mail_outline),
-            label: 'Buzón',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.menu),
-            label: 'Más',
-          ),
-        ],
-      ),*/
-    );
-  }
-}
-
-// 🃏 Widget: Tarjeta de Circuito Recomendado (Lista Horizontal)
-class RecommendedCircuitCard extends StatelessWidget {
-  const RecommendedCircuitCard({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 170,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: Colors.grey.shade100, width: 1.5),
-        boxShadow: const [
-          BoxShadow(
-            color: Colors.black12,
-            blurRadius: 10,
-            offset: Offset(0, 4),
-          )
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Imagen del circuito
-          ClipRRect(
-            borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
-            child: Image.network(
-              'https://placehold.co/170x100.png', // Placeholder image
-              height: 100,
-              width: 170,
-              fit: BoxFit.cover,
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Ubicación (Matagalpa)
-                const Text(
-                  'Matagalpa',
-                  style: TextStyle(color: Colors.grey, fontSize: 12),
-                ),
-                const SizedBox(height: 4),
-                // Título (Finca la esperanza)
-                const Text(
-                  'Finca la esperanza',
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
-                ),
-                const SizedBox(height: 8),
-                // Calificación (Rating)
-                Row(
+            // Bottom Navigation Bar
+            Container(
+              padding: const EdgeInsets.symmetric(vertical: 12),
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                border: Border(top: BorderSide(color: Color(0xFFE9ECEF))),
+              ),
+              child: SafeArea(
+                top: false,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: const [
-                    Icon(Icons.star, color: Colors.amber, size: 16),
-                    SizedBox(width: 4),
-                    Text(
-                      '4.8',
-                      style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                    _NavItem(
+                      icon: Icons.square,
+                      label: 'Explorar',
+                      isActive: true,
+                    ),
+                    _NavItem(
+                      icon: Icons.square,
+                      label: 'Mapa',
+                    ),
+                    _NavItem(
+                      icon: Icons.square,
+                      label: 'Pasaporte',
+                    ),
+                    _NavItem(
+                      icon: Icons.square,
+                      label: 'Perfil',
                     ),
                   ],
                 ),
-                const SizedBox(height: 8),
-                // Precio (Alineado a la derecha)
-                const Align(
-                  alignment: Alignment.centerRight,
-                  child: Text(
-                    '\$25 / persona',
-                    style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
-                  ),
-                ),
-              ],
+              ),
             ),
-          ),
-        ],
+            Container(
+              width: 140,
+              height: 5,
+              margin: const EdgeInsets.only(bottom: 8),
+              decoration: BoxDecoration(
+                color: Colors.black,
+                borderRadius: BorderRadius.circular(2.5),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
 }
 
-// 🃏 Widget: Tarjeta de Siguiente Aventura (Lista Vertical)
-class NextAdventureCard extends StatelessWidget {
-  const NextAdventureCard({super.key});
+class _PopularCard extends StatelessWidget {
+  final String title;
+  final String subtitle;
+
+  const _PopularCard({required this.title, required this.subtitle});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: Colors.grey.shade100, width: 1.5),
-        boxShadow: const [
-          BoxShadow(
-            color: Colors.black12,
-            blurRadius: 10,
-            offset: Offset(0, 4),
-          )
-        ],
-      ),
-      child: Row(
-        children: [
-          // Imagen de la aventura
-          ClipRRect(
-            borderRadius: const BorderRadius.horizontal(left: Radius.circular(16)),
-            child: Image.network(
-              'https://placehold.co/100x120.png', // Placeholder image
-              height: 120,
-              width: 100,
-              fit: BoxFit.cover,
+    return GestureDetector(
+      onTap: () => context.push('/detalles'),
+      child: Container(
+        width: 160,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: Colors.grey.shade200),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              child: Container(
+                margin: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: const Color(0xFFE9ECEF),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
             ),
-          ),
-          const SizedBox(width: 12),
-          // Detalles de la aventura
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 12.0),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(12, 0, 12, 16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Etiqueta (Gastronomía)
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFF0EAE1), // Color de fondo beige/crema
-                      borderRadius: BorderRadius.circular(12),
+                  Text(
+                    title,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                      color: Color(0xFF1A1C1E),
                     ),
-                    child: const Text(
-                      'Gastronomía',
-                      style: TextStyle(color: Color(0xFF163323), fontSize: 10, fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  // Título (Ruta del café)
-                  const Text(
-                    'Ruta del café',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                   ),
                   const SizedBox(height: 4),
-                  // Ubicación (Matagalpa) con ícono
                   Row(
-                    children: const [
-                      Icon(Icons.location_on_outlined, color: Colors.grey, size: 16),
-                      SizedBox(width: 4),
-                      Text(
-                        'Matagalpa, Nicaragua',
-                        style: TextStyle(color: Colors.grey, fontSize: 12),
+                    children: [
+                      Container(
+                        width: 10,
+                        height: 10,
+                        decoration: const BoxDecoration(
+                          color: Color(0xFFB0B8C1),
+                          shape: BoxShape.circle,
+                        ),
                       ),
-                    ],
-                  ),
-                  const SizedBox(height: 8),
-                  // Calificación (Rating) e ícono de Bookmark
-                  Row(
-                    children: const [
-                      Icon(Icons.star, color: Colors.amber, size: 16),
-                      SizedBox(width: 4),
+                      const SizedBox(width: 4),
                       Text(
-                        '4.8',
-                        style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
-                      ),
-                      Spacer(), // Empuja el icono al final
-                      Padding(
-                        padding: EdgeInsets.only(right: 12.0),
-                        child: Icon(Icons.bookmark_outline, color: Colors.black87),
+                        subtitle,
+                        style: const TextStyle(
+                          fontSize: 12,
+                          color: Colors.grey,
+                        ),
                       ),
                     ],
                   ),
                 ],
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
+    );
+  }
+}
+
+class _NearbyCard extends StatelessWidget {
+  final String title;
+  final String subtitle;
+
+  const _NearbyCard({required this.title, required this.subtitle});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () => context.push('/detalles'),
+      child: Container(
+        padding: const EdgeInsets.all(12),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: Colors.grey.shade200),
+        ),
+        child: Row(
+          children: [
+            Container(
+              width: 64,
+              height: 64,
+              decoration: BoxDecoration(
+                color: const Color(0xFFE9ECEF),
+                borderRadius: BorderRadius.circular(12),
+              ),
+            ),
+            const SizedBox(width: 16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15,
+                      color: Color(0xFF1A1C1E),
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    subtitle,
+                    style: const TextStyle(
+                      fontSize: 13,
+                      color: Colors.grey,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const Icon(
+              Icons.chevron_right,
+              color: Color(0xFF1A1C1E),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _NavItem extends StatelessWidget {
+  final IconData icon;
+  final String label;
+  final bool isActive;
+
+  const _NavItem({
+    required this.icon,
+    required this.label,
+    this.isActive = false,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final color = isActive ? const Color(0xFF1A1C1E) : const Color(0xFFADB5BD);
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Icon(icon, color: color, size: 28),
+        const SizedBox(height: 4),
+        Text(
+          label,
+          style: TextStyle(
+            color: color,
+            fontSize: 12,
+            fontWeight: isActive ? FontWeight.bold : FontWeight.normal,
+          ),
+        ),
+      ],
     );
   }
 }

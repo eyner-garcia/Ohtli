@@ -1,67 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
-
+import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../features/auth/presentation/viewmodels/auth_viewmodel.dart';
-import '../../features/utils/presentation/views/gatekeeper_view.dart';
 import '../../features/auth/presentation/views/login_view.dart';
-import '../../features/auth/presentation/views/signup_view.dart';
-import '../../features/auth/presentation/views/forgot_password_view.dart';
-import '../../features/auth/presentation/views/verify_otp_view.dart';
-import '../../features/auth/presentation/views/reset_password_view.dart';
 import '../../features/home/presentation/views/swipe_screen.dart';
-import '../../features/utils/presentation/views/onboarding_view.dart';
+import '../../features/home/presentation/views/explora_view.dart';
+import '../../features/home/presentation/views/explora_feed_view.dart';
+import '../../features/home/presentation/views/detalles_view.dart';
+import '../../features/home/presentation/views/reseñas_view.dart';
 import '../../features/utils/presentation/views/splash_view.dart';
+import '../../features/utils/presentation/views/onboarding_view.dart';
 
-part 'app_router.g.dart';
-
-class RouterNotifier extends ChangeNotifier {
-  final Ref _ref;
-
-  RouterNotifier(this._ref) {
-    _ref.listen(
-      authViewModelProvider,
-          (_, __) => notifyListeners(),
-    );
-  }
-}
-
-@Riverpod(keepAlive: true)
-RouterNotifier routerNotifier(RouterNotifierRef ref) {
-  return RouterNotifier(ref);
-}
-
-@Riverpod(keepAlive: true)
-GoRouter router(RouterRef ref) {
-  final notifier = ref.watch(routerNotifierProvider);
+final routerProvider = Provider<GoRouter>((ref) {
+  final authState = ref.watch(authStateStreamProvider);
 
   return GoRouter(
-    initialLocation: '/splash',
-    refreshListenable: notifier,
+    initialLocation: '/home',
     redirect: (BuildContext context, GoRouterState state) {
-      final authState = ref.read(authViewModelProvider);
-      final isAuthenticated = authState.asData?.value != null;
+      final session = authState.asData?.value.session;
 
-      final publicRoutes = [
-        '/splash',
-        '/onboarding',
-        '/gatekeeper',
-        '/login',
-        '/register',
-        '/forgot-password',
-        '/verify-otp',
-        '/reset-password'
-      ];
+      final publicRoutes = ['/splash', '/onboarding', '/login', '/quiz', '/register'];
       final isPublicRoute = publicRoutes.contains(state.matchedLocation);
 
-      if (!isAuthenticated && !isPublicRoute) {
-        return '/gatekeeper';
-      }
+      final isLoggingIn = state.matchedLocation == '/login';
 
-      if (isAuthenticated && isPublicRoute) {
-        return '/home';
-      }
+      if (session == null && !isLoggingIn) return '/login';
+      if (session != null && isLoggingIn) return '/home';
 
       return null;
     },
@@ -75,56 +40,29 @@ GoRouter router(RouterRef ref) {
         builder: (context, state) => const OnboardingScreen(),
       ),
       GoRoute(
-        path: '/gatekeeper',
-        builder: (context, state) => const GatekeeperView(),
-      ),
-      GoRoute(
         path: '/login',
-        builder: (context, state) => const LoginView(),
+        builder: (context, state) => const LoginScreen(),
       ),
       GoRoute(
-        path: '/register',
-        builder: (context, state) => const SignUpView(),
-      ),
-      GoRoute(
-        path: '/forgot-password',
-        builder: (context, state) => const ForgotPasswordView(),
-      ),
-      GoRoute(
-        path: '/verify-otp',
-        builder: (context, state) {
-          final email = state.extra as String? ?? '';
-          return VerifyOtpView(email: email);
-        },
-      ),
-      GoRoute(
-        path: '/reset-password',
-        builder: (context, state) => const ResetPasswordView(),
+        path: '/quiz',
+        builder: (context, state) => const SwipeScreen(),
       ),
       GoRoute(
         path: '/home',
-        builder: (context, state) => const HomeScreen(),
+        builder: (context, state) => const ExploraScreen(),
+      ),
+      GoRoute(
+        path: '/explora-feed',
+        builder: (context, state) => const ExploraFeedScreen(),
+      ),
+      GoRoute(
+        path: '/detalles',
+        builder: (context, state) => const DetallesScreen(),
+      ),
+      GoRoute(
+        path: '/resenas',
+        builder: (context, state) => const ResenasScreen(),
       ),
     ],
   );
-}
-
-class HomeScreen extends ConsumerWidget {
-  const HomeScreen({super.key});
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Ohtli - Inicio'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.logout),
-            onPressed: () => ref.read(authViewModelProvider.notifier).logout(),
-          ),
-        ],
-      ),
-      body: const Center(child: Text('¡Bienvenido a tu próxima Aventura!')),
-    );
-  }
-}
+});
