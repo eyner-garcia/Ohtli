@@ -125,6 +125,25 @@ class _DrawerProfileHeader extends ConsumerWidget {
               ),
             ),
 
+            // Botón para editar perfil
+            TextButton(
+              onPressed: () {
+                onNavigateAfterPop(
+                  context,
+                      () => context.pushNamed(
+                    'edit_profile',
+                    extra: profile,
+                  ),
+                );
+              },
+              child: const Text(
+                'Editar Perfil',
+                style: TextStyle(
+                  decoration: TextDecoration.underline,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
 
             const SizedBox(height: 10),
 
