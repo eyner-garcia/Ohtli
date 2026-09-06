@@ -10,7 +10,18 @@ import '../../features/auth/presentation/views/reset_password_view.dart';
 import '../../features/auth/presentation/views/signup_view.dart';
 import '../../features/auth/presentation/views/verify_otp_view.dart';
 
-//import '../../features/home/presentation/views/swipe_screen.dart';
+import '../../features/home/domain/entities/destination_entity.dart';
+import '../../features/home/presentation/views/detalles_view.dart';
+import '../../features/home/presentation/views/explora_feed_view.dart';
+import '../../features/home/presentation/views/explora_view.dart';
+import '../../features/home/presentation/views/reseñas_view.dart';
+
+import '../../features/mapa/domain/entities/route_entity.dart';
+import '../../features/mapa/presentation/views/detalles_view.dart';
+import '../../features/mapa/presentation/views/mapa_view.dart';
+import '../../features/mapa/presentation/views/ruta_view.dart';
+
+import '../../features/pasaporte/presentation/views/passport_view.dart';
 
 import '../../features/perfil/domain/entities/profile.dart';
 import '../../features/perfil/presentation/views/edit_profile_view.dart';
@@ -19,12 +30,6 @@ import '../../features/perfil/presentation/views/profile_view.dart';
 import '../../features/utils/presentation/views/gatekeeper_view.dart';
 import '../../features/utils/presentation/views/onboarding_view.dart';
 import '../../features/utils/presentation/views/splash_view.dart';
-
-import '../../features/pasaporte/presentation/views/passport_view.dart';
-
-// IMPORTA AQUÍ LA PANTALLA REAL DEL MAPA.
-// Ejemplo:
-// import '../../features/mapa/presentation/views/map_view.dart';
 
 import '../widgets/main_scaffold.dart';
 
@@ -36,7 +41,7 @@ class RouterNotifier extends ChangeNotifier {
   RouterNotifier(this._ref) {
     _ref.listen(
       authViewModelProvider,
-          (_, __) => notifyListeners(),
+      (_, __) => notifyListeners(),
     );
   }
 }
@@ -92,15 +97,14 @@ GoRouter router(Ref ref) {
     },
 
     redirect: (
-        BuildContext context,
-        GoRouterState state,
-        ) {
+      BuildContext context,
+      GoRouterState state,
+    ) {
       final authState = ref.read(
         authViewModelProvider,
       );
 
-      final isAuthenticated =
-          authState.asData?.value != null;
+      final isAuthenticated = authState.asData?.value != null;
 
       final currentPath = state.matchedLocation;
 
@@ -118,8 +122,7 @@ GoRouter router(Ref ref) {
         '/reset-password',
       };
 
-      final isPublicRoute =
-      publicRoutes.contains(currentPath);
+      final isPublicRoute = publicRoutes.contains(currentPath);
 
       if (!isAuthenticated && !isPublicRoute) {
         return '/gatekeeper';
@@ -133,7 +136,6 @@ GoRouter router(Ref ref) {
     },
 
     routes: [
-
       GoRoute(
         path: '/splash',
         name: 'splash',
@@ -206,8 +208,7 @@ GoRouter router(Ref ref) {
         },
       ),
 
-
-
+      // Rutas fijas fuera del StatefulShellRoute para superponerse
       GoRoute(
         path: '/profile',
         name: 'profile',
@@ -232,53 +233,87 @@ GoRouter router(Ref ref) {
         },
       ),
 
+      GoRoute(
+        path: '/explora-feed',
+        name: 'explora_feed',
+        builder: (context, state) => const ExploraFeedScreen(),
+      ),
 
+      GoRoute(
+        path: '/detalles',
+        name: 'detalles',
+        builder: (context, state) {
+          final destination = state.extra as DestinationEntity?;
+          return DetallesScreen(destination: destination);
+        },
+      ),
+
+      GoRoute(
+        path: '/resenas',
+        name: 'resenas',
+        builder: (context, state) {
+          final destinationId = state.extra as String?;
+          return ResenasScreen(destinationId: destinationId);
+        },
+      ),
+
+      GoRoute(
+        path: '/buscar-ruta',
+        name: 'buscar_ruta',
+        builder: (context, state) => const RutaView(),
+      ),
+
+      GoRoute(
+        path: '/detalles-ruta',
+        name: 'detalles_ruta',
+        builder: (context, state) {
+          final route = state.extra as RouteEntity?;
+          return DetallesMapaView(route: route);
+        },
+      ),
+
+      // Shell para navegación inferior principal
       StatefulShellRoute.indexedStack(
         builder: (
-            context,
-            state,
-            navigationShell,
-            ) {
+          context,
+          state,
+          navigationShell,
+        ) {
           return MainScaffold(
             navigationShell: navigationShell,
           );
         },
 
         branches: [
-
+          // Rama 1: Explorar (Home)
           StatefulShellBranch(
             routes: [
               GoRoute(
                 path: '/home',
                 name: 'home',
-                builder: (context, state) {
-                  return const _MapRoutePlaceholder();
-                },
+                builder: (context, state) => const ExploraView(),
               ),
             ],
           ),
 
-
+          // Rama 2: Mapa
           StatefulShellBranch(
             routes: [
               GoRoute(
                 path: '/mapa',
                 name: 'mapa',
-                builder: (context, state) {
-                  return const _MapRoutePlaceholder();
-                },
+                builder: (context, state) => const MapaView(),
               ),
             ],
           ),
 
+          // Rama 3: Pasaporte
           StatefulShellBranch(
             routes: [
               GoRoute(
                 path: '/pasaporte',
                 name: 'pasaporte',
-                builder: (context, state) {
-                  return const PassportView();
-                },
+                builder: (context, state) => const PassportView(),
               ),
             ],
           ),
@@ -286,21 +321,4 @@ GoRouter router(Ref ref) {
       ),
     ],
   );
-}
-
-
-class _MapRoutePlaceholder extends StatelessWidget {
-  const _MapRoutePlaceholder();
-
-  @override
-  Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: Icon(
-          Icons.map_outlined,
-          size: 64,
-        ),
-      ),
-    );
-  }
 }
