@@ -45,7 +45,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
 
     return Scaffold(
       appBar: AppBar(
-          leading: IconButton(
+        leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () => context.push('/gatekeeper'),
         ),
